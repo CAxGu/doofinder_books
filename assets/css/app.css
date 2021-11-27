@@ -153,12 +153,68 @@ ul.list_books {
 }
 
 .container_book {
-    padding: 2px 16px;
+    /*padding: 2px 16px;*/
 }
 
 .grid {
     padding: 2.5%;
     display: grid;
-    grid-template-columns: 20% 70% 1%;
+    grid-template-columns: 15% 65% 20%;
     grid-template-rows: 1fr;
+}
+
+.card-details-container {
+    text-align: left;
+    border-bottom: 1px solid #e3e3e3;
+    background: lavender;
+    border-radius: 6px;
+    padding: 1em;
+    margin-bottom: 3rem;
+    font-weight: 200;
+    font-size: 120%;
+}
+
+.card-details-show {
+    display: inherit;
+    transition: height 600ms ease-out;
+}
+
+.card-details-hide {
+    display: none;
+    transition: height 600ms ease-in;
+}
+
+.edit-button-card {
+    background-color: #5cb85c;
+    ;
+    border: #5cb85c;
+    font-size: 1em;
+    padding: 0 0.5em;
+}
+
+.edit-button-card:hover {
+    background-color: #04AA6D!important;
+    border-color: #4cae4c !important;
+}
+
+.edit-button-card::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f044";
+}
+
+.delete-button-card {
+    background-color: #dc3545;
+    border: #dc3545;
+    font-size: 1em;
+    padding: 0 0.5em;
+}
+
+.delete-button-card:hover {
+    background-color: #aa2a37!important;
+    border-color: #aa2a37 !important;
+}
+
+.delete-button-card::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f2ed";
 }

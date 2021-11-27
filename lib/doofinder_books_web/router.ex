@@ -21,6 +21,8 @@ defmodule DoofinderBooksWeb.Router do
     get "/about", PageController, :index
     get "/list", ReadController, :read
     get "/about/:messenger", PageController, :show
+
+    resources "/books", BookController
   end
 
   # Other scopes may use custom stacks.

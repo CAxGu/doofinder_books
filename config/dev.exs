@@ -2,10 +2,10 @@ import Config
 
 # Configure your database
 config :doofinder_books, DoofinderBooks.Repo,
-  username: "user of your database",
-  password: "password for your database",
-  database: "name of your database",
-  hostname: "host for your bbdd",
+  username: "caxgu",
+  password: "caxgudoofinder",
+  database: "doofinder",
+  hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
@@ -22,7 +22,7 @@ config :doofinder_books, DoofinderBooksWeb.Endpoint,
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "secret_key_base_generated_in_your_proyect",
+  secret_key_base: "MDXdxENJ1ntMRkTGh18BIAcitIVPBRRHGqIziYJ+5E7nKm2/T28jk4NDfzCvqe3f",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}

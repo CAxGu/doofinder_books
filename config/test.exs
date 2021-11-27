@@ -17,7 +17,7 @@ config :doofinder_books, DoofinderBooks.Repo,
 # you can enable the server option below.
 config :doofinder_books, DoofinderBooksWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
-  secret_key_base: "secret_key_base_for_testing",
+  secret_key_base: "936JS0ldDFdfUMq8Nptm+9EH3xJ/p1eIJ1fi4xeBPgGZu2mUxVgXYScVUKA6aP3Y",
   server: false
 
 # In test we don't send emails.
