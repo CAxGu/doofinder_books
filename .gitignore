@@ -32,3 +32,5 @@ doofinder_books-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# Ignore all the configuration files inside the config dir
+/config/
