@@ -20,6 +20,7 @@ defmodule DoofinderBooksWeb.Router do
     get "/", HelloController, :index
     get "/about", PageController, :index
     get "/list", ReadController, :read
+    get "/books", BookController, :index
     get "/about/:messenger", PageController, :show
 
     resources "/books", BookController

@@ -1,6 +1,7 @@
 defmodule DoofinderBooks.DBooks.Book do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Phoenix.LiveView.JS
 
   schema "books" do
     field :authors, :string

@@ -7,7 +7,7 @@ function accederListadoLibros() {
     if (window.location.pathname == '/') {
         let btnAccess = document.getElementById('btnAcceso_lista');
         if (btnAccess != null && btnAccess != undefined) {
-            btnAccess.addEventListener("click", () => window.location.pathname = '/list');
+            btnAccess.addEventListener("click", () => window.location.pathname = '/books');
         }
     }
 }
@@ -27,7 +27,15 @@ function detectarBusqueda() {
     }
 }
 
+function mostrarDetalle() {
+    $(document).on('click', '.content-showhide', function(event) {
+        let idDetail = 'cardDetailsId_' + event.currentTarget.id.split("_")[1];
+        $("#" + idDetail).toggle('slow', 'swing');
+        $("#showDetailsId_" + event.currentTarget.id.split("_")[1]).toggle();
+        $("#hideDetailsId_" + event.currentTarget.id.split("_")[1]).toggle();
+    });
+}
 
-
+window.onload = mostrarDetalle();
 window.onload = accederListadoLibros();
 window.onload = detectarBusqueda();

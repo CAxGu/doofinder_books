@@ -159,7 +159,7 @@ ul.list_books {
 .grid {
     padding: 2.5%;
     display: grid;
-    grid-template-columns: 15% 65% 20%;
+    grid-template-columns: 20% 59% 21%;
     grid-template-rows: 1fr;
 }
 
@@ -175,18 +175,29 @@ ul.list_books {
 }
 
 .card-details-show {
-    display: inherit;
-    transition: height 600ms ease-out;
+    display: block;
+    /*transition: height 600ms ease-out;*/
 }
 
 .card-details-hide {
     display: none;
-    transition: height 600ms ease-in;
+    /*    transition: height 600ms ease-in;*/
+}
+
+.content-showhide:hover {
+    cursor: pointer;
+}
+
+.info,
+.btns_gestion,
+.miniatura {
+    width: 100%;
+    height: auto;
+    padding: 1em;
 }
 
 .edit-button-card {
     background-color: #5cb85c;
-    ;
     border: #5cb85c;
     font-size: 1em;
     padding: 0 0.5em;
@@ -217,4 +228,9 @@ ul.list_books {
 .delete-button-card::before {
     font-family: "Font Awesome 5 Free";
     content: "\f2ed";
+}
+
+.content-showhide {
+    color: #0069d9;
+    background-color: #e3e3e3;
 }

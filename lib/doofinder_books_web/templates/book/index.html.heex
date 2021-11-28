@@ -1,32 +1,36 @@
 <div class="phx-hero">
   <div id="buscador_libros">
-    <span><%= link "New Book", to: Routes.book_path(@conn, :new) %></span>
     <input type="text" placeholder="Buscar Libro..">
   </div>
- <ul class="list_books">
+  <div >
+    <%= button("New Book", to: Routes.book_path(@conn, :new), method: :get, class: "btn new-button-card") %>
+  </div>
+  <ul class="list_books">
     <%= for book <- @books do %>
-        <li>
-          <div id={["cardId_", book.id] |> Enum.join ""} class="card_book">
+      <li>
+        <div id={["cardId_", book.id] |> Enum.join ""} class="card_book">
           <div class="grid">
             <div class="miniatura">
               <img src={Routes.static_path(@conn, "/images/book.png")} alt="Avatar" style="width:100%">
             </div>
-          
-          <div class="info">
-            <div class="container_book">
-              <p>
-                <b><%= book.title %></b>
-                <label><%= book.authors %></label>
-              </p>
+            <div class="info">
+              <div class="container_book">
+                <p>
+                  <b><%= book.title %></b>
+                  <label><%= book.authors %></label>
+                </p>
+              </div>
+            </div>
+            <div class="btns_gestion">
+              <%= button("", to: Routes.book_path(@conn, :edit, book), method: :get, class: "btn edit-button-card") %>
+              <%= button("", to: Routes.book_path(@conn, :delete, book), method: :delete, data: [confirm: "Are you sure?"], class: "btn delete-button-card") %>
             </div>
           </div>
-          <div class="btns_gestion">
-            <span><%= link "Show", to: Routes.book_path(@conn, :show, book) %></span>
-            <%= button("", to: Routes.book_path(@conn, :edit, book), method: :get, class: "btn edit-button-card") %>
-            <%= button("", to: Routes.book_path(@conn, :delete, book), method: :delete, data: [confirm: "Are you sure?"], class: "btn delete-button-card") %>
+          <div id={["showhideId_", book.id] |> Enum.join ""} class="text-center content-showhide">
+            <span id={["showDetailsId_", book.id] |> Enum.join ""}><i class="fas fa-eye"></i>&nbsp;Mostrar Detalle</span>
+            <span hidden id={["hideDetailsId_", book.id] |> Enum.join ""}><i  class="fas fa-eye-slash"></i>&nbsp;Ocultar Detalle</span>
           </div>
-        </div>
-        <div class="card-details-container card-details-hide">
+          <div id={["cardDetailsId_", book.id] |> Enum.join ""} class="card-details-container card-details-hide">
                 <label>DESC: <%= book.description %></label>
                 <label>ISBN: <%= book.isbn %></label>
                 <label>publishing_date: <%= book.publishing_date %></label>
@@ -34,50 +38,9 @@
                 <label>CATEGORIES: <%= book.categories %></label>
                 <label>publishing: <%= book.publishing %></label>
                 <label>language: <%= book.language %></label>
+          </div>
         </div>
-        </div>
-        </li>
+      </li>
     <% end %>
   </ul>
 </div>
-
-<table>
-  <thead>
-    <tr>
-      <th>ID_Book</th>
-      <th>Isbn</th>
-      <th>Title</th>
-      <th>Authors</th>
-      <th>Description</th>
-      <th>Publishing date</th>
-      <th>Retired date</th>
-      <th>Categories</th>
-      <th>Publishing</th>
-      <th>Language</th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for book <- @books do %>
-    <tr>
-      <td><%= book.id %></td>
-      <td><%= book.isbn %></td>
-      <td><%= book.title %></td>
-      <td><%= book.authors %></td>
-      <td><%= book.description %></td>
-      <td><%= book.publishing_date %></td>
-      <td><%= book.retired_date %></td>
-      <td><%= book.categories %></td>
-      <td><%= book.publishing %></td>
-      <td><%= book.language %></td>
-
-      <td>
-        <span><%= link "Show", to: Routes.book_path(@conn, :show, book) %></span>
-        <span><%= link "Edit", to: Routes.book_path(@conn, :edit, book) %></span>
-        <span><%= link "Delete", to: Routes.book_path(@conn, :delete, book), method: :delete, data: [confirm: "Are you sure?"] %></span>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-

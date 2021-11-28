@@ -15,7 +15,7 @@ config :doofinder_books, DoofinderBooksWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [view: DoofinderBooksWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: DoofinderBooks.PubSub,
-  live_view: [signing_salt: "GkQAGZkq"]
+  live_view: [signing_salt: "dU5d3N1XXIFl4CQJMlTsJX/xZRusUfyw"]
 
 # Configures the mailer
 #
