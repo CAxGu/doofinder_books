@@ -1,7 +1,6 @@
 defmodule DoofinderBooks.DBooks.Book do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Phoenix.LiveView.JS
 
   schema "books" do
     field :authors, :string
@@ -21,6 +20,6 @@ defmodule DoofinderBooks.DBooks.Book do
   def changeset(book, attrs) do
     book
     |> cast(attrs, [:isbn, :title, :authors, :description, :publishing_date, :retired_date, :categories, :publishing, :language])
-    |> validate_required([:isbn, :title, :authors, :description, :publishing_date, :retired_date, :categories, :publishing, :language])
+    |> validate_required([:isbn, :title, :authors, :description, :publishing_date, :categories, :publishing, :language])
   end
 end

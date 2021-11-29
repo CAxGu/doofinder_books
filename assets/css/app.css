@@ -27,6 +27,7 @@
     color: #a94442;
     background-color: #f2dede;
     border-color: #ebccd1;
+    transition-duration: 5s;
 }
 
 .alert p {
@@ -41,6 +42,8 @@
     color: #a94442;
     display: block;
     margin: -1rem 0 2rem;
+    font-size: 1.3em;
+    text-align: left;
 }
 
 
@@ -111,20 +114,43 @@
 
 /* Estilos Botones Aplicación*/
 
-.btn-success {
+.btn-success,
+.btn-submitForm {
     color: #fff;
     background-color: #5cb85c;
-    border-color: #4cae4c;
+    border-color: #5cb85c;
 }
 
-.btn-success:hover {
+.btn-success:hover,
+.btn-submitForm:hover {
     background-color: #04AA6D!important;
-    border-color: #4cae4c !important;
+    border-color: #04AA6D !important;
 }
 
-.btn-success:focus {
+.btn-success:focus,
+.btn-submitForm:focus {
     background-color: #04AA6D!important;
-    border-color: #4cae4c !important;
+    border-color: #04AA6D !important;
+}
+
+.btn-cancel {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-cancel:hover {
+    background-color: #aa2a37!important;
+    border-color: #aa2a37 !important;
+}
+
+.btn-cancel:focus {
+    background-color: #aa2a37!important;
+    border-color: #aa2a37 !important;
+}
+
+.container-submit-form {
+    text-align: right;
 }
 
 
@@ -156,7 +182,7 @@ ul.list_books {
     /*padding: 2px 16px;*/
 }
 
-.grid {
+.grid-book-list {
     padding: 2.5%;
     display: grid;
     grid-template-columns: 20% 59% 21%;
@@ -166,7 +192,7 @@ ul.list_books {
 .card-details-container {
     text-align: left;
     border-bottom: 1px solid #e3e3e3;
-    background: lavender;
+    background: aliceblue;
     border-radius: 6px;
     padding: 1em;
     margin-bottom: 3rem;
@@ -176,12 +202,10 @@ ul.list_books {
 
 .card-details-show {
     display: block;
-    /*transition: height 600ms ease-out;*/
 }
 
 .card-details-hide {
     display: none;
-    /*    transition: height 600ms ease-in;*/
 }
 
 .content-showhide:hover {
@@ -205,7 +229,7 @@ ul.list_books {
 
 .edit-button-card:hover {
     background-color: #04AA6D!important;
-    border-color: #4cae4c !important;
+    border-color: #04AA6D !important;
 }
 
 .edit-button-card::before {
@@ -233,4 +257,258 @@ ul.list_books {
 .content-showhide {
     color: #0069d9;
     background-color: #e3e3e3;
+}
+
+
+/*
+Campos Formulario Editar/Nuevo
+*/
+
+.important {
+    float: left;
+    color: orange;
+}
+
+.form-container {
+    text-align: center;
+    border-bottom: 1px solid #e3e3e3;
+    background: aliceblue;
+    border-radius: 6px;
+    padding: 5%;
+    margin-bottom: 1rem;
+    font-weight: 200;
+    font-size: 50%;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.frow-1 {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.frow-2 {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.frow-3 {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.frow-4 {
+    grid-column: 1;
+    grid-row: 4;
+}
+
+.frow-5 {
+    grid-column: 1;
+    grid-row: 5;
+}
+
+.block-1 {
+    display: grid;
+    grid-template-columns: 33% 46% 21%;
+    grid-template-rows: 1fr;
+}
+
+.block-2 {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr;
+}
+
+.block-3 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 1fr;
+}
+
+.block-4 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 1fr;
+}
+
+.block-5 {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr;
+}
+
+
+/*Contenedor ISBN*/
+
+.isbn-book {
+    width: 95%;
+    padding: 0 5% 0 0;
+    height: auto;
+}
+
+.isbn-label {
+    text-transform: uppercase;
+    text-align: left;
+    max-width: 100%;
+    float: left;
+}
+
+.isbn-input {
+    max-width: 100%;
+}
+
+
+/*Contenedor PUBLISHING*/
+
+.publishing-book {
+    width: 95%;
+    padding: 0 5% 0 0;
+    height: auto;
+}
+
+.publishing-label {
+    text-transform: uppercase;
+    text-align: left;
+    max-width: 100%;
+    float: left;
+}
+
+.publishing-input {
+    max-width: 100%;
+}
+
+
+/*Contenedor LANGUAGE*/
+
+.language-book {
+    width: 100%;
+    height: auto;
+}
+
+.language-label {
+    text-transform: uppercase;
+    text-align: left;
+    max-width: 100%;
+    float: left;
+}
+
+.language-input {
+    width: 100%;
+    background-color: white;
+}
+
+
+/*Contenedor TITLE*/
+
+.title-book {
+    width: 100%;
+    height: auto;
+}
+
+.title-label {
+    text-transform: uppercase;
+    text-align: left;
+    max-width: 100%;
+    float: left;
+}
+
+.title-input {
+    max-width: 100%;
+}
+
+
+/*Contenedor AUTHORS*/
+
+.authors-book {
+    width: 95%;
+    padding: 0 5% 0 0;
+    height: auto;
+}
+
+.authors-label {
+    text-transform: uppercase;
+    text-align: left;
+    max-width: 100%;
+    float: left;
+}
+
+.authors-input {
+    width: 100%;
+    background-color: white;
+}
+
+
+/*Contenedor CATEGORY*/
+
+.category-book {
+    width: 100%;
+    height: auto;
+}
+
+.category-label {
+    text-transform: uppercase;
+    text-align: left;
+    max-width: 100%;
+    float: left;
+}
+
+.category-input {
+    width: 100%;
+    background-color: white;
+}
+
+
+/*Contenedor DATES*/
+
+.dates-pub-book {
+    width: 95%;
+    padding: 0 5% 0 0;
+    height: auto;
+}
+
+.dates-ret-book {
+    width: 100%;
+    height: auto;
+}
+
+.dates-pub-label {
+    text-transform: uppercase;
+    text-align: left;
+    max-width: 100%;
+    float: left;
+}
+
+.dates-pub-input {
+    max-width: 100%
+}
+
+.dates-ret-label {
+    text-transform: uppercase;
+    text-align: left;
+    max-width: 100%;
+    float: left;
+}
+
+.dates-ret-input {
+    max-width: 100%;
+}
+
+
+/*Contenedor DESCRIPTION*/
+
+.description-book {
+    width: 100%;
+    height: auto;
+}
+
+.description-label {
+    text-transform: uppercase;
+    text-align: left;
+    max-width: 100%;
+    float: left;
+}
+
+.description-input {
+    max-width: 100%;
+    background-color: #ffffff;
 }

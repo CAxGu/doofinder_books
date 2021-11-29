@@ -1,5 +1,6 @@
-<h1>New Book</h1>
+<div class="phx-hero">
+<span><%= link "Volver Atrás", to: Routes.book_path(@conn, :index) %></span>
+    <h1>Alta Libro</h1>
 
-<%= render "form.html", Map.put(assigns, :action, Routes.book_path(@conn, :create)) %>
-
-<span><%= link "Back", to: Routes.book_path(@conn, :index) %></span>
+    <%= render "form.html", Map.put(assigns, :action, Routes.book_path(@conn, :create)) %>  
+</div>

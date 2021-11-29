@@ -1,47 +1,101 @@
 <.form let={f} for={@changeset} action={@action}>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+      <p>Oops, algo no ha ido bien! Revise los errores siguientes.</p>
     </div>
   <% end %>
 
-  <%= label f, :isbn %>
-  <%= text_input f, :isbn %>
-  <%= error_tag f, :isbn %>
+  <div class="form-container">
+    <div class="frow-1">
+      <div class="block-1">
+        <div class="isbn-book">
+          <label>
+            <%= label f, :isbn, class: "isbn-label" %><span class="important">&nbsp;*</span>
+          </label>
+          <%= text_input f, :isbn, class: "isbn-input", placeholder: "000-0-00-000000-0",  maxlength: "17" %>
+          <%= error_tag f, :isbn %>
+        </div>
 
-  <%= label f, :title %>
-  <%= text_input f, :title %>
-  <%= error_tag f, :title %>
+        <div class="publishing-book">
+          <label>
+            <%= label f, :publishing, class: "publishing-label" %><span class="important">&nbsp;*</span>
+          </label> 
+          <%= text_input f, :publishing, class: "publishing-input" %>
+          <%= error_tag f, :publishing %>
+        </div>
 
-  <%= label f, :authors %>
-  <%= text_input f, :authors %>
-  <%= error_tag f, :authors %>
+        <div class="language-book">
+          <label>
+            <%= label f, :language, class: "language-label" %><span class="important">&nbsp;*</span>
+          </label>
+          <%= select f, :language, [" ": "", Español: "ESP", Inglés: "ING"], class: "language-input"  %>
+          <%= error_tag f, :language %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="frow-2">
+      <div class="block-2">
+        <div class="title-book">
+          <label>
+            <%= label f, :title, class: "title-label" %><span class="important">&nbsp;*</span>
+          </label>
+          <%= text_input f, :title, class: "title-input" %>
+          <%= error_tag f, :title %>
+        </div>
+      </div>
+    </div>
+    <div class="frow-3">
+      <div class="block-3">
+        <div class="authors-book">
+          <label>
+            <%= label f, :authors, class: "authors-label" %><span class="important">&nbsp;*</span>
+          </label>
+          <%= text_input f, :authors, class: "authors-input" %>
+          <%= error_tag f, :authors %>
+        </div>
+      
+        <div class="category-book">
+          <label>
+            <%= label f, :categories, class: "category-label" %><span class="important">&nbsp;*</span>
+          </label>
+          <%= select f, :categories, [" ": "", Fantasía: "fantasia", Misterio: "misterio", Histórica: "historica", Biografías: "biografias"], class: "category-input"  %>
+          <%= error_tag f, :categories %>
+        </div>
+      </div>
+    </div>
+    <div class="frow-4">
+      <div class="block-4">
+        <div class="dates-pub-book">
+          <label>
+            <%= label f, :publishing_date, class: "dates-pub-label" %><span class="important">&nbsp;*</span>
+          </label>
+          <%= text_input f, :publishing_date, class: "dates-pub-input",  id: "datepicker_pub", placeholder: "MM/DD/YYYY", readonly: true %>
+          <%= error_tag f, :publishing_date %>
+        </div>
+        <div class="dates-ret-book">
+          <%= label f, :retired_date, class: "dates-ret-label" %>
+          <%= text_input f, :retired_date, class: "dates-ret-input", id: "datepicker_ret", placeholder: "MM/DD/YYYY", readonly: true  %>
+        </div>
+      </div>
+    </div>
+    <div class="frow-5">
+     <div class="block-5">
+        <div class="description-book">
+          <label>
+            <%= label f, :description, class: "description-label" %><span class="important">&nbsp;*</span>
+          </label>
+          <%= textarea f, :description, class: "description-input", maxlength: "255" %>
+          <%= error_tag f, :description %>
+        </div>
+      </div>
+    </div>    
+  </div>
 
-  <%= label f, :description %>
-  <%= textarea f, :description %>
-  <%= error_tag f, :description %>
-
-  <%= label f, :publishing_date %>
-  <%= date_select f, :publishing_date %>
-  <%= error_tag f, :publishing_date %>
-
-  <%= label f, :retired_date %>
-  <%= date_select f, :retired_date %>
-  <%= error_tag f, :retired_date %>
-
-  <%= label f, :categories %>
-  <%= text_input f, :categories %>
-  <%= error_tag f, :categories %>
-
-  <%= label f, :publishing %>
-  <%= text_input f, :publishing %>
-  <%= error_tag f, :publishing %>
-
-  <%= label f, :language %>
-  <%= text_input f, :language %>
-  <%= error_tag f, :language %>
-
-  <div>
-    <%= submit "Save" %>
+  <div id="btns-form">
+    <div class="container-submit-form">
+      <%= submit "Guardar", class: "btn-submitForm" %>
+      <%= button("Cancelar", to: Routes.book_path(@conn, :index), method: :get , class: "btn-cancel") %>
+    </div>
   </div>
 </.form>

@@ -9,7 +9,7 @@
     <%= for book <- @books do %>
       <li>
         <div id={["cardId_", book.id] |> Enum.join ""} class="card_book">
-          <div class="grid">
+          <div class="grid-book-list ">
             <div class="miniatura">
               <img src={Routes.static_path(@conn, "/images/book.png")} alt="Avatar" style="width:100%">
             </div>
