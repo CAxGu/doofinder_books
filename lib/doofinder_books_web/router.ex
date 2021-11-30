@@ -23,6 +23,8 @@ defmodule DoofinderBooksWeb.Router do
     get "/about/:messenger", PageController, :show
 
     resources "/books", BookController
+    resources "/authors", AuthorController
+    resources "/categories", CategoryController
   end
 
   # Other scopes may use custom stacks.

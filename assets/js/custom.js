@@ -47,19 +47,20 @@ $("#datepicker_ret").attr('disabled', true);
 $(function() {
     $("#datepicker_pub").datepicker({
         defaultDate: new Date(),
-        formatDate: 'dd/mm/yy',
+        dateFormat: 'yy-mm-dd',
         onSelect: function(dateStr) {
             $("#datepicker_ret").attr('disabled', false);
-            $("#datepicker_ret").datepicker("option", { defaultDate: new Date(dateStr), minDate: new Date(dateStr) })
-            $('#datepicker_pub').val(returnFormatDateAsStr(dateStr));
+            $("#datepicker_ret").datepicker("option", { dateFormat: 'yy-mm-dd', defaultDate: new Date(dateStr), minDate: new Date(dateStr) })
+                //$('#datepicker_pub').val(returnFormatDateAsStr(dateStr));
         }
     });
 });
 
 $(function() {
     $('#datepicker_ret').datepicker({
+        dateFormat: 'yy-mm-dd',
         onSelect: function(dateStr) {
-            $('#datepicker_ret').val(returnFormatDateAsStr(dateStr));
+            //$('#datepicker_ret').val(returnFormatDateAsStr(dateStr));
         }
     });
 });
@@ -81,6 +82,7 @@ $.datepicker.regional['es'] = {
     weekHeader: 'Sm',
     firstDay: 1,
     isRTL: false,
+    dateFormat: 'yy-mm-dd',
     showMonthAfterYear: false,
     yearSuffix: ''
 };

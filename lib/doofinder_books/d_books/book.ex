@@ -3,8 +3,6 @@ defmodule DoofinderBooks.DBooks.Book do
   import Ecto.Changeset
 
   schema "books" do
-    field :authors, :string
-    field :categories, :string
     field :description, :string
     field :isbn, :string
     field :language, :string
@@ -19,7 +17,7 @@ defmodule DoofinderBooks.DBooks.Book do
   @doc false
   def changeset(book, attrs) do
     book
-    |> cast(attrs, [:isbn, :title, :authors, :description, :publishing_date, :retired_date, :categories, :publishing, :language])
-    |> validate_required([:isbn, :title, :authors, :description, :publishing_date, :categories, :publishing, :language])
+    |> cast(attrs, [:isbn, :title, :description, :publishing_date, :retired_date, :publishing, :language])
+    |> validate_required([:isbn, :title, :publishing_date, :publishing])
   end
 end

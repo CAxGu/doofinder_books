@@ -12,7 +12,7 @@
           <label>
             <%= label f, :isbn, class: "isbn-label" %><span class="important">&nbsp;*</span>
           </label>
-          <%= text_input f, :isbn, class: "isbn-input", placeholder: "000-0-00-000000-0",  maxlength: "17" %>
+          <%= text_input f, :isbn, class: "isbn-input", placeholder: "00000000000000000",  maxlength: "17" %>
           <%= error_tag f, :isbn %>
         </div>
 
@@ -26,10 +26,9 @@
 
         <div class="language-book">
           <label>
-            <%= label f, :language, class: "language-label" %><span class="important">&nbsp;*</span>
+            <%= label f, :language, class: "language-label" %>
           </label>
           <%= select f, :language, [" ": "", Español: "ESP", Inglés: "ING"], class: "language-input"  %>
-          <%= error_tag f, :language %>
         </div>
       </div>
     </div>
@@ -51,7 +50,7 @@
           <label>
             <%= label f, :authors, class: "authors-label" %><span class="important">&nbsp;*</span>
           </label>
-          <%= text_input f, :authors, class: "authors-input" %>
+          <%= select f, :authors, @authors, class: "authors-input"  %>
           <%= error_tag f, :authors %>
         </div>
       
@@ -59,7 +58,7 @@
           <label>
             <%= label f, :categories, class: "category-label" %><span class="important">&nbsp;*</span>
           </label>
-          <%= select f, :categories, [" ": "", Fantasía: "fantasia", Misterio: "misterio", Histórica: "historica", Biografías: "biografias"], class: "category-input"  %>
+          <%= select f, :categories, @categories, class: "category-input"  %>
           <%= error_tag f, :categories %>
         </div>
       </div>
@@ -70,12 +69,12 @@
           <label>
             <%= label f, :publishing_date, class: "dates-pub-label" %><span class="important">&nbsp;*</span>
           </label>
-          <%= text_input f, :publishing_date, class: "dates-pub-input",  id: "datepicker_pub", placeholder: "MM/DD/YYYY", readonly: true %>
+          <%= text_input f, :publishing_date, class: "dates-pub-input",  id: "datepicker_pub", placeholder: "MM-DD-YYYY", readonly: true %>
           <%= error_tag f, :publishing_date %>
         </div>
         <div class="dates-ret-book">
           <%= label f, :retired_date, class: "dates-ret-label" %>
-          <%= text_input f, :retired_date, class: "dates-ret-input", id: "datepicker_ret", placeholder: "MM/DD/YYYY", readonly: true  %>
+          <%= text_input f, :retired_date, class: "dates-ret-input", id: "datepicker_ret", placeholder: "MM-DD-YYYY", readonly: true  %>
         </div>
       </div>
     </div>
@@ -83,10 +82,9 @@
      <div class="block-5">
         <div class="description-book">
           <label>
-            <%= label f, :description, class: "description-label" %><span class="important">&nbsp;*</span>
+            <%= label f, :description, class: "description-label" %>
           </label>
           <%= textarea f, :description, class: "description-input", maxlength: "255" %>
-          <%= error_tag f, :description %>
         </div>
       </div>
     </div>    

@@ -17,7 +17,11 @@
               <div class="container_book">
                 <p>
                   <b><%= book.title %></b>
-                  <label><%= book.authors %></label>
+                  <label>
+                  <%= for author <- @authors do %>
+                    <%= author.fullname %>
+                  <% end %>
+                  </label>
                 </p>
               </div>
             </div>
@@ -35,7 +39,11 @@
                 <label>ISBN: <%= book.isbn %></label>
                 <label>publishing_date: <%= book.publishing_date %></label>
                 <label>retired_date:<%= book.retired_date %></label>
-                <label>CATEGORIES: <%= book.categories %></label>
+                <label>CATEGORIES: 
+                  <%= for category <- @categories do %>
+                    <%= category.name %>
+                  <% end %>
+                </label>
                 <label>publishing: <%= book.publishing %></label>
                 <label>language: <%= book.language %></label>
           </div>
