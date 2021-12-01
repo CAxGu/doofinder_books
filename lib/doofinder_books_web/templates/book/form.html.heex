@@ -18,7 +18,7 @@
 
         <div class="publishing-book">
           <label>
-            <%= label f, :publishing, class: "publishing-label" %><span class="important">&nbsp;*</span>
+            <%= label f, :Editorial, class: "publishing-label" %><span class="important">&nbsp;*</span>
           </label> 
           <%= text_input f, :publishing, class: "publishing-input" %>
           <%= error_tag f, :publishing %>
@@ -26,7 +26,7 @@
 
         <div class="language-book">
           <label>
-            <%= label f, :language, class: "language-label" %>
+            <%= label f, :Idioma, class: "language-label" %>
           </label>
           <%= select f, :language, [" ": "", Español: "ESP", Inglés: "ING"], class: "language-input"  %>
         </div>
@@ -37,7 +37,7 @@
       <div class="block-2">
         <div class="title-book">
           <label>
-            <%= label f, :title, class: "title-label" %><span class="important">&nbsp;*</span>
+            <%= label f, :Título, class: "title-label" %><span class="important">&nbsp;*</span>
           </label>
           <%= text_input f, :title, class: "title-input" %>
           <%= error_tag f, :title %>
@@ -48,18 +48,18 @@
       <div class="block-3">
         <div class="authors-book">
           <label>
-            <%= label f, :authors, class: "authors-label" %><span class="important">&nbsp;*</span>
+            <%= label f, :Autor, class: "authors-label" %><span class="important">&nbsp;*</span>
           </label>
-          <%= select f, :authors, @authors, class: "authors-input"  %>
-          <%= error_tag f, :authors %>
+          <%= select(f, :author_id, @authors, class: "authors-select") %>
+          <%= error_tag f, :author_id %>
         </div>
       
         <div class="category-book">
           <label>
-            <%= label f, :categories, class: "category-label" %><span class="important">&nbsp;*</span>
+            <%= label f, :Categoría, class: "category-label" %><span class="important">&nbsp;*</span>
           </label>
-          <%= select f, :categories, @categories, class: "category-input"  %>
-          <%= error_tag f, :categories %>
+          <%= select(f, :category_id, @categories, class: "category-select")  %>
+          <%= error_tag f, :category_id %>
         </div>
       </div>
     </div>
@@ -67,13 +67,13 @@
       <div class="block-4">
         <div class="dates-pub-book">
           <label>
-            <%= label f, :publishing_date, class: "dates-pub-label" %><span class="important">&nbsp;*</span>
+            <%= label f, :Fecha_Publicación, class: "dates-pub-label" %><span class="important">&nbsp;*</span>
           </label>
           <%= text_input f, :publishing_date, class: "dates-pub-input",  id: "datepicker_pub", placeholder: "MM-DD-YYYY", readonly: true %>
           <%= error_tag f, :publishing_date %>
         </div>
         <div class="dates-ret-book">
-          <%= label f, :retired_date, class: "dates-ret-label" %>
+          <%= label f, :Fecha_Retirada, class: "dates-ret-label" %>
           <%= text_input f, :retired_date, class: "dates-ret-input", id: "datepicker_ret", placeholder: "MM-DD-YYYY", readonly: true  %>
         </div>
       </div>
@@ -82,7 +82,7 @@
      <div class="block-5">
         <div class="description-book">
           <label>
-            <%= label f, :description, class: "description-label" %>
+            <%= label f, :Descripción, class: "description-label" %>
           </label>
           <%= textarea f, :description, class: "description-input", maxlength: "255" %>
         </div>

@@ -3,9 +3,8 @@ defmodule DoofinderBooks.RelationsBooks.Rel_book_category do
   import Ecto.Changeset
 
   schema "rel_books_categories" do
-    field :book_id, :integer
     field :category_id, :integer
-
+    field :book_id, :integer
     timestamps()
   end
 

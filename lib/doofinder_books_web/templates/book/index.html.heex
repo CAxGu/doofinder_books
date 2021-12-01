@@ -3,7 +3,9 @@
     <input type="text" placeholder="Buscar Libro..">
   </div>
   <div >
-    <%= button("New Book", to: Routes.book_path(@conn, :new), method: :get, class: "btn new-button-card") %>
+    <%= button("Alta Libro", to: Routes.book_path(@conn, :new), method: :get, class: "btn new-button-card new-book") %>
+    <%= button("Autores", to: Routes.author_path(@conn, :index), method: :get, class: "btn new-button-card author-list") %>
+    <%= button("Categorías", to: Routes.category_path(@conn, :index), method: :get, class: "btn new-button-card category-list") %>
   </div>
   <ul class="list_books">
     <%= for book <- @books do %>

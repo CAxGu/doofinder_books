@@ -432,9 +432,9 @@ Campos Formulario Editar/Nuevo
     float: left;
 }
 
-.authors-input {
+.authors-select {
     width: 100%;
-    background-color: white;
+    background-color: white !important;
 }
 
 
@@ -452,9 +452,9 @@ Campos Formulario Editar/Nuevo
     float: left;
 }
 
-.category-input {
+.category-select {
     width: 100%;
-    background-color: white;
+    background-color: white !important;
 }
 
 

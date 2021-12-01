@@ -22,6 +22,18 @@ defmodule DoofinderBooks.DCategory do
   end
 
   @doc """
+  Returns the list of categories but only the ID and Name.
+  """
+  def list_AllIdNameCategories do
+    query = from(category in Category, select: {
+      category.name,
+      category.id,
+    })
+    Repo.all(query)
+  end
+
+
+  @doc """
   Gets a single category.
 
   Raises `Ecto.NoResultsError` if the Category does not exist.

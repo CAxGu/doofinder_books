@@ -17,9 +17,23 @@ defmodule DoofinderBooks.DAuthor do
       [%Author{}, ...]
 
   """
+
   def list_authors do
     Repo.all(Author)
   end
+
+
+  @doc """
+  Returns the list of authors but only the ID and Name.
+  """
+  def list_AllIdNameAuthors do
+    query = from(author in Author, select: {
+      author.fullname,
+      author.id,
+    })
+    Repo.all(query)
+  end
+
 
   @doc """
   Gets a single author.

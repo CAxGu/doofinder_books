@@ -5,8 +5,11 @@ defmodule DoofinderBooks.DBooks do
 
   import Ecto.Query, warn: false
   alias DoofinderBooks.Repo
+  alias Ecto.Multi
 
   alias DoofinderBooks.DBooks.Book
+  alias DoofinderBooks.RelationsBooks.Rel_book_author
+  alias DoofinderBooks.RelationsBooks.Rel_book_category
 
   @doc """
   Returns the list of books.
@@ -50,9 +53,29 @@ defmodule DoofinderBooks.DBooks do
 
   """
   def create_book(attrs \\ %{}) do
+    %Rel_book_author{}
+    |> Rel_book_author.changeset(attrs)
+    %Rel_book_category{}
+    |> Rel_book_category.changeset(attrs)
     %Book{}
     |> Book.changeset(attrs)
-    |> Repo.insert()
+    #|> Repo.insert()
+  end
+
+  def create_book_with_relations(attrs \\ %{}) do
+    Multi.new()
+    |> Multi.insert(:book, Book.changeset(%Book{}, attrs))
+    |> Multi.run(:rel_book_author, fn repo, %{book: book} ->
+      book_id = book.id
+      author_id = attrs["author_id"]
+      Repo.insert(Rel_book_author.changeset(%Rel_book_author{}, %{author_id: author_id ,book_id: book_id}))
+    end)
+    |> Multi.run(:rel_book_category, fn repo, %{rel_book_author: rel_book_author} ->
+      book_id = rel_book_author.book_id
+      category_id = attrs["category_id"]
+      Repo.insert(Rel_book_category.changeset(%Rel_book_category{}, %{category_id: category_id ,book_id: book_id}))
+    end)
+    |> Repo.transaction()
   end
 
   @doc """

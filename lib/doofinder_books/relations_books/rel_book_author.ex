@@ -5,7 +5,6 @@ defmodule DoofinderBooks.RelationsBooks.Rel_book_author do
   schema "rel_books_authors" do
     field :author_id, :integer
     field :book_id, :integer
-
     timestamps()
   end
 
