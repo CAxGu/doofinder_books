@@ -1,7 +1,7 @@
 defmodule DoofinderBooks.RelationsBooks do
   import Ecto.Query, warn: false
   alias DoofinderBooks.Repo
-
+  alias Ecto.Multi
   alias DoofinderBooks.RelationsBooks.Rel_book_author
   alias DoofinderBooks.RelationsBooks.Rel_book_category
 
@@ -11,6 +11,10 @@ defmodule DoofinderBooks.RelationsBooks do
   end
 
   def get_rel_book_author!(id), do: Repo.get!(Rel_book_author, id)
+
+  def get_by_rel_book_author!(idBook) do
+    Repo.get_by!(Rel_book_author, [book_id: idBook])
+  end
 
   @doc """
   def create_rel_book_author(bookId, timeInsert, authors \\ %{}) do
@@ -62,6 +66,12 @@ defmodule DoofinderBooks.RelationsBooks do
   end
 
   def get_rel_book_category!(id), do: Repo.get!(Rel_book_category, id)
+
+  def get_by_rel_book_category!(idBook) do
+    Repo.get_by!(Rel_book_category, [book_id: idBook])
+  end
+
+
 
   @doc """
   def create_rel_book_category(categories \\ %{}, bookId, timeInsert) do

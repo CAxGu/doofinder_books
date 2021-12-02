@@ -34,11 +34,18 @@ defmodule DoofinderBooksWeb.AuthorController do
   def edit(conn, %{"id" => id}) do
     author = DAuthor.get_author!(id)
     changeset = DAuthor.change_author(author)
+
+    IO.inspect("AUTHOR EDIT!")
+    IO.inspect(author)
+    IO.inspect(changeset)
+
     render(conn, "edit.html", author: author, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "author" => author_params}) do
     author = DAuthor.get_author!(id)
+    IO.inspect("AUTHOR UPDATE!")
+    IO.inspect(author)
 
     case DAuthor.update_author(author, author_params) do
       {:ok, author} ->
