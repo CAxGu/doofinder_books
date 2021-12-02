@@ -14,4 +14,10 @@ defmodule DoofinderBooks.RelationsBooks.Rel_book_author do
     |> cast(attrs, [:book_id, :author_id])
     |> validate_required([:book_id, :author_id])
   end
+
+  def create_author_rel_changeset(model, params \\ %{}) do
+    model
+    |> cast(params, [:book_id, :author_id])
+    |> validate_required([:book_id, :author_id])
+  end
 end

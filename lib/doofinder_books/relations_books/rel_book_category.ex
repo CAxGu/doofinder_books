@@ -14,4 +14,10 @@ defmodule DoofinderBooks.RelationsBooks.Rel_book_category do
     |> cast(attrs, [:book_id, :category_id])
     |> validate_required([:book_id, :category_id])
   end
+
+  def create_category_rel_changeset(model, params \\ %{}) do
+    model
+    |> cast(params, [:book_id, :category_id])
+    |> validate_required([:book_id, :category_id])
+  end
 end

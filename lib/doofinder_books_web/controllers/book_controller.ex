@@ -28,22 +28,20 @@ defmodule DoofinderBooksWeb.BookController do
   def new(conn, _params) do
     # Mapeamos autores y categorías para convertirlos en un select multiple
     # Añadimos un campo vacío a los array para obligar al usuario a seleccionar 1 autor y 1 categoría
-    authors = [{:"", ""} | DAuthor.list_AllIdNameAuthors()]
-    categories = [{:"", ""} | DCategory.list_AllIdNameCategories()]
-    changeset = DBooks.change_book(%Book{})
+    authorList = [{:"", ""} | DAuthor.list_AllIdNameAuthors()]
+    categoryList = [{:"", ""} | DCategory.list_AllIdNameCategories()]
+    changeset = Book.form_createBook_changeset(%Book{authorsInfo: [%Rel_book_author{}], categoriesInfo: [%Rel_book_category{}]})
 
-    IO.inspect("NEW_CHANGESET!!!")
-    IO.inspect(changeset)
-
-
-
-    render(conn, "new.html", changeset: changeset, authors: authors, categories: categories)
+    #changeset = DBooks.change_book(%Book{})
+    render(conn, "new.html", authors: authorList, categories: categoryList, changeset: changeset)
   end
 
   @doc """
   Función que da de alta un libro nuevo, relacionando en las tablas correspondintes sus respectivos autor y categoría
   """
   def create(conn, %{"book" => book_params}) do
+    authorList = [{:"", ""} | DAuthor.list_AllIdNameAuthors()]
+    categoryList = [{:"", ""} | DCategory.list_AllIdNameCategories()]
     case DBooks.create_book_with_relations(book_params) do
       {:ok, book} ->
         conn
@@ -51,27 +49,9 @@ defmodule DoofinderBooksWeb.BookController do
         |> redirect(to: Routes.book_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        authorList = [{:"", ""} | DAuthor.list_AllIdNameAuthors()]
-        categoryList = [{:"", ""} | DCategory.list_AllIdNameCategories()]
-        render(conn, "new.html", changeset: changeset, authors: authorList, categories: categoryList)
+        render(conn, "new.html", authors: authorList, categories: categoryList, changeset: changeset)
     end
   end
-
-@doc """
-FUNCION INICIAL PARA CREAR LIBROS
-
-  def create(conn, %{"book" => book_params}) do
-    case DBooks.create_book(book_params) do
-      {:ok, book} ->
-        conn
-        |> put_flash(:info, "Libro dado de alta correctamente.")
-        |> redirect(to: Routes.book_path(conn, :index))
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset, authors: authorList, categories: categoryList)
-    end
-  end
-"""
 
   def show(conn, %{"id" => id}) do
     book = DBooks.get_all_book_info!(id)
@@ -82,59 +62,37 @@ FUNCION INICIAL PARA CREAR LIBROS
     books = DBooks.get_all_book_info!(id)
     map = fromDB_to_map(books)
     book = Enum.at(map, 0)
+    book_ = DBooks.get_book!(id)
+
+    upbook = fromDB_to_editmap(book,book_)
     authorList = [{:"", ""} | DAuthor.list_AllIdNameAuthors()]
     categoryList = [{:"", ""} | DCategory.list_AllIdNameCategories()]
-    #changeset = DBooks.change_book(book)
-
-    book_ = DBooks.get_book!(id)
-    upbook = fromDB_to_editmap(book,book_)
     changeset = DBooks.change_book(upbook)
 
-    render(conn, "edit.html", book: upbook, authors: authorList, categories: categoryList, changeset: changeset,)
+    render(conn, "edit.html", book: upbook, authors: authorList, categories: categoryList, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "book" => book_params}) do
-
-
-
     book_ = DBooks.get_book!(id)
-    IO.inspect("BOOK_ UPDATE")
-    IO.inspect(book_)
+
     #prueba = fromDB_to_editmap(book,book_)
-    IO.inspect("PRUEBA UPDATE")
+
     #IO.inspect(prueba)
 
     books = DBooks.get_all_book_info!(id)
     map = fromDB_to_map(books)
     book = Enum.at(map, 0)
-    id_author = book_params["author_id"]
-    id_category = book_params["category_id"]
-    id_book = book_.id
+    #id_author = book_params["author_id"]
+    #id_category = book_params["category_id"]
+    #id_book = book_.id
 
-    IO.inspect("UPDATE???")
-    IO.inspect(id)
-    IO.inspect(book_)
-    IO.inspect(book_params)
-    IO.inspect(DBooks.change_book(%Book{}, book_params))
-    IO.inspect(id_author)
-    IO.inspect(id_category)
-    #IO.inspect(RelationsBooks.change_rel_book_author(%Rel_book_author{}, %{author_id: id_author ,book_id: id_book}))
-    #IO.inspect(RelationsBooks.change_rel_book_category(%Rel_book_category{}, %{category_id: id_category ,book_id: id_book}))
 
-    #rel_author = RelationsBooks.change_rel_book_author(%Rel_book_author{}, %{author_id: id_author ,book_id: id_book})
-    #rel_category = RelationsBooks.change_rel_book_category(%Rel_book_category{}, %{category_id: id_category ,book_id: id_book})
 
     rel_author = RelationsBooks.get_by_rel_book_author!(id)
     rel_category = RelationsBooks.get_by_rel_book_category!(id)
 
-    IO.inspect(books)
-    IO.inspect(book)
-    IO.inspect("DENTRO!!")
-    IO.inspect(book_)
-    pureba2 = RelationsBooks.get_by_rel_book_category!(id)
-    IO.inspect(pureba2)
-    IO.inspect(rel_author)
-    IO.inspect(rel_category)
+
+    #pureba2 = RelationsBooks.get_by_rel_book_category!(id)
 
     case DBooks.update_book_and_relations(book_, book_params, rel_author, rel_category) do
       {:ok, book} ->

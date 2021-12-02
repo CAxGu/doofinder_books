@@ -140,17 +140,6 @@ defmodule DoofinderBooks.DBooks do
   end
 
   def update_book_and_relations(%Book{} = book, attrs, %Rel_book_author{} = rel_book_author, %Rel_book_category{} = rel_book_category) do
-    IO.inspect("DENTRO DEL UPDATE REALTIONS")
-    IO.inspect(attrs)
-    IO.inspect(book)
-    book_id = book.id
-    author_id = attrs["author_id"]
-    category_id = attrs["category_id"]
-
-    IO.inspect("UPDATE BOOK AND RELATIONS")
-    IO.inspect(book)
-    IO.inspect(book |> Book.changeset(attrs))
-
     Multi.new()
     |> Multi.update(:book_, book |> Book.changeset(attrs))
     |> Multi.update(:rel_book_author_, rel_book_author |> Rel_book_author.changeset(attrs))
