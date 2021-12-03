@@ -1,7 +1,6 @@
 defmodule DoofinderBooks.RelationsBooks do
   import Ecto.Query, warn: false
   alias DoofinderBooks.Repo
-  alias Ecto.Multi
   alias DoofinderBooks.RelationsBooks.Rel_book_author
   alias DoofinderBooks.RelationsBooks.Rel_book_category
 

@@ -6,12 +6,9 @@ defmodule DoofinderBooks.DBooks do
   import Ecto.Query, warn: false
   alias DoofinderBooks.Repo
   alias Ecto.Multi
-
   alias DoofinderBooks.DBooks.Book
   alias DoofinderBooks.RelationsBooks.Rel_book_author
   alias DoofinderBooks.RelationsBooks.Rel_book_category
-  alias DoofinderBooks.DAuthor.Author
-  alias DoofinderBooks.DCategory.Category
 
   @doc """
   Returns the list of books.
