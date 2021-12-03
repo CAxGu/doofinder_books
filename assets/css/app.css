@@ -512,3 +512,37 @@ Campos Formulario Editar/Nuevo
     max-width: 100%;
     background-color: #ffffff;
 }
+
+
+/*
+css pagina About
+*/
+
+.list_navbar {
+    color: white;
+}
+
+.list_navbar a {
+    color: white;
+}
+
+.list_navbar a:hover {
+    color: #fff031
+}
+
+.link_navbar_about::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f2bb";
+}
+
+.back-about {
+    background-color: aliceblue;
+}
+
+.back-about .row {
+    text-align: left;
+}
+
+.back-about .logo_about {
+    background-color: #1b1851;
+}

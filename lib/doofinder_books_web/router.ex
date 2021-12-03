@@ -19,9 +19,6 @@ defmodule DoofinderBooksWeb.Router do
 
     get "/", HelloController, :index
     get "/about", PageController, :index
-    get "/list", ReadController, :read
-    get "/about/:messenger", PageController, :show
-
     resources "/books", BookController
     resources "/authors", AuthorController
     resources "/categories", CategoryController

@@ -61,6 +61,14 @@ defmodule DoofinderBooks.DBooks do
   def get_book!(id), do: Repo.get!(Book, id)
 
   @doc """
+  Hace un Preload de los changeset mergeados dentro de book (authorinfo y categariesinfo)
+  Return un Array de Book (aunque solo devolverá 1 array de 1 elemento por la clausula where)
+  """
+  def get_book_preloaded!(id) do
+    Repo.all from p in Book, preload: [:authorsinfo, :categoriesinfo], where: p.id == ^id
+  end
+
+  @doc """
     Metodo que nos devolverá toda la información del libro con el solicitado.
     Recuperará en esta ocasión el category.id y authors.id en lugar de su category.name y authors.fullname, para poder tratar los datos desde el form edit
    """
@@ -104,9 +112,9 @@ defmodule DoofinderBooks.DBooks do
   'rel_book_authors' y 'rel_book_categories.
 
   Dado que las tablas comparten FOREIGN_KEYS , se precisa crear primero el registro del libro y finalmente las relaciones asociadas
-  """
-  def create_book_with_relations(attrs \\ %{}) do
-    Multi.new()
+
+  Alternativa de create_book_with_relations con MultiInserts:
+   Multi.new()
     |> Multi.insert(:book, Book.changeset(%Book{}, attrs))
     |> Multi.run(:rel_book_author, fn repo, %{book: book} ->
       book_id = book.id
@@ -119,7 +127,14 @@ defmodule DoofinderBooks.DBooks do
       Repo.insert(Rel_book_category.changeset(%Rel_book_category{}, %{category_id: category_id ,book_id: book_id}))
     end)
     |> Repo.transaction()
+  """
+  def create_book_with_relations(attrs \\ %{}) do
+    %Book{}
+    |> Book.form_createBook_changeset(attrs)
+    |> Repo.insert()
   end
+
+
 
   @doc """
   Updates a book.
@@ -139,12 +154,22 @@ defmodule DoofinderBooks.DBooks do
     |> Repo.update()
   end
 
-  def update_book_and_relations(%Book{} = book, attrs, %Rel_book_author{} = rel_book_author, %Rel_book_category{} = rel_book_category) do
+  @doc """
+  Funcion que permite realizar una actualización escalonada de todos los campos relacionados con un libro.maybe_improper_list
+
+  Alternativa con Multi:
+   def update_book_and_relations(%Book{} = book, attrs, %Rel_book_author{} = rel_book_author, %Rel_book_category{} = rel_book_category) do
     Multi.new()
     |> Multi.update(:book_, book |> Book.changeset(attrs))
     |> Multi.update(:rel_book_author_, rel_book_author |> Rel_book_author.changeset(attrs))
     |> Multi.update(:rel_book_category_, rel_book_category |> Rel_book_category.changeset(attrs))
     |> Repo.transaction()
+   end
+  """
+  def update_book_and_relations(%Book{} = book, attrs) do
+    book
+    |> Book.form_createBook_changeset(attrs)
+    |> Repo.update()
   end
 
   @doc """
@@ -182,8 +207,6 @@ defmodule DoofinderBooks.DBooks do
     |> Repo.transaction()
   end
 
-
-
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking book changes.
 
@@ -195,5 +218,12 @@ defmodule DoofinderBooks.DBooks do
   """
   def change_book(%Book{} = book, attrs \\ %{}) do
     Book.changeset(book, attrs)
+  end
+
+  @doc """
+  Devuelve un `%Ecto.Changeset{}` con todos los changeset embed de book, rel_books_authors y rel_books_categories
+  """
+  def change_book_relations(%Book{} = book, attrs \\ %{}) do
+    Book.form_createBook_changeset(book, attrs)
   end
 end

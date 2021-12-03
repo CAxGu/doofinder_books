@@ -6,11 +6,12 @@
     <%= button("Alta Libro", to: Routes.book_path(@conn, :new), method: :get, class: "btn new-button-card new-book") %>
     <%= button("Autores", to: Routes.author_path(@conn, :index), method: :get, class: "btn new-button-card author-list") %>
     <%= button("Categorías", to: Routes.category_path(@conn, :index), method: :get, class: "btn new-button-card category-list") %>
+    <label class={if length(@authors)>0 && length(@categories)>0 do "hola" else "pepe" end}>label disable</label>
   </div>
   <ul class="list_books">
     <%= for book <- @books do %>
       <li>
-        <div id={["cardId_", book.id] |> Enum.join ""} class="card_book">
+        <div id={(["cardId_", book.id] |> Enum.join "")} class="card_book">
           <div class="grid-book-list ">
             <div class="miniatura">
               <img src={Routes.static_path(@conn, "/images/book.png")} alt="Avatar" style="width:100%">

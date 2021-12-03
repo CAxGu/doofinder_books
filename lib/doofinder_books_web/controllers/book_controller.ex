@@ -21,18 +21,21 @@ defmodule DoofinderBooksWeb.BookController do
   """
   def index(conn, _params) do
     books = DBooks.list_all_books_info()
+    authors = DAuthor.list_authors()
+    categories = DCategory.list_categories()
     map = fromDB_to_map(books)
-    render(conn, "index.html",books: map)
+    render(conn, "index.html",books: map, authors: authors, categories: categories)
   end
 
+  @doc """
+  Funcion que prepara formulario en modo create, precargando changeset con toda la información del id dado
+  """
   def new(conn, _params) do
     # Mapeamos autores y categorías para convertirlos en un select multiple
     # Añadimos un campo vacío a los array para obligar al usuario a seleccionar 1 autor y 1 categoría
     authorList = [{:"", ""} | DAuthor.list_AllIdNameAuthors()]
     categoryList = [{:"", ""} | DCategory.list_AllIdNameCategories()]
-    changeset = Book.form_createBook_changeset(%Book{authorsInfo: [%Rel_book_author{}], categoriesInfo: [%Rel_book_category{}]})
-
-    #changeset = DBooks.change_book(%Book{})
+    changeset = DBooks.change_book_relations(%Book{authorsinfo: [%Rel_book_author{}],categoriesinfo: [%Rel_book_category{}]})
     render(conn, "new.html", authors: authorList, categories: categoryList, changeset: changeset)
   end
 
@@ -58,52 +61,32 @@ defmodule DoofinderBooksWeb.BookController do
     render(conn, "show.html", book: book)
   end
 
+  @doc """
+  Funcion que prepara formulario en modo edit, precargando changeset con toda la información del id dado
+  """
   def edit(conn, %{"id" => id}) do
-    books = DBooks.get_all_book_info!(id)
-    map = fromDB_to_map(books)
-    book = Enum.at(map, 0)
-    book_ = DBooks.get_book!(id)
-
-    upbook = fromDB_to_editmap(book,book_)
+    book = Enum.at(DBooks.get_book_preloaded!(id), 0)
     authorList = [{:"", ""} | DAuthor.list_AllIdNameAuthors()]
     categoryList = [{:"", ""} | DCategory.list_AllIdNameCategories()]
-    changeset = DBooks.change_book(upbook)
-
-    render(conn, "edit.html", book: upbook, authors: authorList, categories: categoryList, changeset: changeset)
+    changeset = DBooks.change_book_relations(book)
+    render(conn, "edit.html", book: book, authors: authorList, categories: categoryList, changeset: changeset)
   end
 
+  @doc """
+  Persistencia en base de datos de los datos asociados al libro modificado
+  """
   def update(conn, %{"id" => id, "book" => book_params}) do
-    book_ = DBooks.get_book!(id)
-
-    #prueba = fromDB_to_editmap(book,book_)
-
-    #IO.inspect(prueba)
-
-    books = DBooks.get_all_book_info!(id)
-    map = fromDB_to_map(books)
-    book = Enum.at(map, 0)
-    #id_author = book_params["author_id"]
-    #id_category = book_params["category_id"]
-    #id_book = book_.id
-
-
-
-    rel_author = RelationsBooks.get_by_rel_book_author!(id)
-    rel_category = RelationsBooks.get_by_rel_book_category!(id)
-
-
-    #pureba2 = RelationsBooks.get_by_rel_book_category!(id)
-
-    case DBooks.update_book_and_relations(book_, book_params, rel_author, rel_category) do
+    book = Enum.at(DBooks.get_book_preloaded!(id), 0)
+    authorList = [{:"", ""} | DAuthor.list_AllIdNameAuthors()]
+    categoryList = [{:"", ""} | DCategory.list_AllIdNameCategories()]
+    case DBooks.update_book_and_relations(book, book_params) do
       {:ok, book} ->
         conn
         |> put_flash(:info, "Libro actualizado correctamente.")
         |> redirect(to: Routes.book_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        authorList = [{:"", ""} | DAuthor.list_AllIdNameAuthors()]
-        categoryList = [{:"", ""} | DCategory.list_AllIdNameCategories()]
-        render(conn, "edit.html", book: book, changeset: changeset)
+        render(conn, "edit.html", book: book, authors: authorList, categories: categoryList, changeset: changeset)
     end
   end
 
@@ -111,7 +94,6 @@ defmodule DoofinderBooksWeb.BookController do
   Borrado de libros y su relación de autor, categorias asociadas
   """
   def delete(conn, %{"id" => id}) do
-
     book = DBooks.get_book!(id)
     {:ok, _book} = DBooks.delete_book_and_relations(book)
 
@@ -120,59 +102,29 @@ defmodule DoofinderBooksWeb.BookController do
     |> redirect(to: Routes.book_path(conn, :index))
   end
 
-  def listAuthors(authors) do
-    for author <- authors do author.fullname end
-  end
-
-  def listCategories(categories) do
-    for category <- categories do category.name end
-  end
-
+  @doc """
+  Retorna un mapeo del objeto obtenido desde base de datos a un map interno
+  """
   def fromDB_to_map(books) do
     Enum.map(books, fn(book) ->
       map_book = Map.merge(%Book{}, book)
     end)
   end
 
+  @doc """
+  Unifica valores entre 2 maps distintos del tipo Book
+  """
   def fromDB_to_editmap(book,book_) do
       Map.merge(book, book_)
   end
 
-
-    @doc """
-  def getIdForAuthorSelected(authors) do
-    for category <- categories do category.name end
-  end
-
-  def getIdForCategorySelected(categories) do
-    for category <- categories do category.name end
-  end
-"""
-
   @doc """
-  def formatToExternalDate (book_params) do
-    IO.inspect("EXTERNAL!!")
-    IO.inspect(book_params)
-    paramPublishingDate = book_params["publishing_date"]
-    #TODO implementar un control de si llega esta fecha
-    #paramRetiredDate = ""
-
-    splitBy = "/"
-    dateSplited = String.split(paramPublishingDate,splitBy)
-    month = Enum.at(dateSplited, 0)
-    day = Enum.at(dateSplited, 1)
-    year = Enum.at(dateSplited, 2)
-    resultPublishingDate = year<>"-"<>month<>"-"<>day
-    book_params = %{book_params | "publishing_date" => resultPublishingDate}
-    Map.replace(book_params, :publishing_date, resultPublishingDate)
-  end
-
-  def parseDateToString (date) do
-    {:ok, fechita} = Timex.format(date, "{0M}/{D}/{YYYY}")
-    IO.inspect(fechita)
-    {:ok, result} = Timex.parse(fechita, "{0M}/{D}/{YYYY}")
-
-    IO.inspect(result)
-  end
+  Carga desde base de datos toda la información sobre un libro solicitado (book, auhtors y categories)
+  y precarga los campos asociados al schema books
   """
+  def preload_changeset_fields (books) do
+    Enum.map(books, fn(book) ->
+      map_book = Map.merge(%Book{authorsinfo: [%Rel_book_author{}],categoriesinfo: [%Rel_book_category{}]}, book)
+    end)
+  end
 end

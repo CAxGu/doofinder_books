@@ -103,6 +103,15 @@ function returnFormatDateAsStr(date) {
     return dayStr + '/' + dateToFormat.getMonth().toString() + '/' + dateToFormat.getFullYear().toString();
 }
 
+$("p.alert").on("show", function() {
+    setTimeout(function() { console.log("hola juaporr"); }, 3000);
+
+});
+
+$(document).on('show', '.p.alert.alert-info', function(event) {
+    console.log("hola preshiosho");
+});
+
 
 window.onload = mostrarDetalle();
 window.onload = accederListadoLibros();

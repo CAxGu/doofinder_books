@@ -1,6 +1,6 @@
 <.form let={f} for={@changeset} action={@action}>
   <%= if @changeset.action do %>
-    <div class="alert alert-danger">
+    <div id="alert_msgs_form" class="alert alert-danger">
       <p>Oops, algo no ha ido bien! Revise los errores siguientes.</p>
     </div>
   <% end %>
@@ -46,7 +46,7 @@
     </div>
     <div class="frow-3">
       <div class="block-3">
-        <%= inputs_for f, :authorsInfo, fn a -> %>
+        <%= inputs_for f, :authorsinfo, fn a -> %>
           <div class="authors-book">
             <label>
               <%= label a, "Autor", class: "authors-label" %><span class="important">&nbsp;*</span>
@@ -55,7 +55,7 @@
             <%= error_tag a, :author_id %>
           </div>
         <% end %>
-        <%= inputs_for f, :categoriesInfo, fn c -> %>
+        <%= inputs_for f, :categoriesinfo, fn c -> %>
           <div class="category-book">
             <label>
               <%= label c, "Categoría", class: "category-label" %><span class="important">&nbsp;*</span>

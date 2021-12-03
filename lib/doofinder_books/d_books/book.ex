@@ -2,6 +2,9 @@ defmodule DoofinderBooks.DBooks.Book do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias DoofinderBooks.RelationsBooks.Rel_book_author
+  alias DoofinderBooks.RelationsBooks.Rel_book_category
+
   schema "books" do
     field :description, :string
     field :isbn, :string
@@ -10,6 +13,8 @@ defmodule DoofinderBooks.DBooks.Book do
     field :publishing_date, :date
     field :retired_date, :date
     field :title, :string
+    has_many :authorsinfo, Rel_book_author
+    has_many :categoriesinfo, Rel_book_category
 
     timestamps()
   end
@@ -21,43 +26,11 @@ defmodule DoofinderBooks.DBooks.Book do
     |> validate_required([:isbn, :title, :publishing_date, :publishing])
   end
 
-  def form_createBook_changeset(model, params \\ %{}) do
-    model
-    |> cast(params, [:isbn, :title, :description, :publishing_date, :retired_date, :publishing, :language])
-    |> cast_assoc(:authorsInfo, required: true, with: &Rel_book_author.create_author_rel_changeset/2)
-    |> cast_assoc(:categoriesInfo, required: true, with: &Rel_book_category.create_category_rel_changeset/2)
+  def form_createBook_changeset(book, attrs) do
+    book
+    |> cast(attrs, [:isbn, :title, :description, :publishing_date, :retired_date, :publishing, :language])
+    |> cast_assoc(:authorsinfo, required: true, with: &Rel_book_author.create_author_rel_changeset/2)
+    |> cast_assoc(:categoriesinfo, required: true, with: &Rel_book_category.create_category_rel_changeset/2)
     |> validate_required([:isbn, :title, :publishing_date, :publishing])
-    |> put_idBook_author_data()
-    |> put_idBook_category_data()
-  end
-
-  defp put_idBook_author_data(changeset) do
-    if changeset.valid? do
-      extras = %{provider: "books", uid: get_field(changeset, :id)}
-
-      book_data =
-        changeset
-        |> get_field(:authorsInfo)
-        |> Enum.map(&Map.merge(&1, extras))
-
-      put_assoc(changeset, :authorsInfo, book_data)
-    else
-      changeset
-    end
-  end
-
-  defp put_idBook_category_data(changeset) do
-    if changeset.valid? do
-      extras = %{provider: "books", uid: get_field(changeset, :id)}
-
-      book_data =
-        changeset
-        |> get_field(:categoriesInfo)
-        |> Enum.map(&Map.merge(&1, extras))
-
-      put_assoc(changeset, :categoriesInfo, book_data)
-    else
-      changeset
-    end
   end
 end
