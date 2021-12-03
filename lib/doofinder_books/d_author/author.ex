@@ -16,6 +16,6 @@ defmodule DoofinderBooks.DAuthor.Author do
   def changeset(author, attrs) do
     author
     |> cast(attrs, [:fullname, :pseudonym, :birth, :death, :nationality])
-    |> validate_required([:fullname, :pseudonym, :birth, :death, :nationality])
+    |> validate_required([:fullname, :birth])
   end
 end

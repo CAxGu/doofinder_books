@@ -18,7 +18,7 @@ defmodule DoofinderBooksWeb.CategoryController do
     case DCategory.create_category(category_params) do
       {:ok, category} ->
         conn
-        |> put_flash(:info, "Category created successfully.")
+        |> put_flash(:info, "Categoría Dada de Alta Correctamente.")
         |> redirect(to: Routes.category_path(conn, :show, category))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -43,7 +43,7 @@ defmodule DoofinderBooksWeb.CategoryController do
     case DCategory.update_category(category, category_params) do
       {:ok, category} ->
         conn
-        |> put_flash(:info, "Category updated successfully.")
+        |> put_flash(:info, "Categoría Actualizada CorrectamenteCategory updated successfully.")
         |> redirect(to: Routes.category_path(conn, :show, category))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -56,7 +56,7 @@ defmodule DoofinderBooksWeb.CategoryController do
     {:ok, _category} = DCategory.delete_category(category)
 
     conn
-    |> put_flash(:info, "Category deleted successfully.")
+    |> put_flash(:info, "Categoría Borrada Correctamente.")
     |> redirect(to: Routes.category_path(conn, :index))
   end
 end

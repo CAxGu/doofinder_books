@@ -1,33 +1,34 @@
-<h1>Show Author</h1>
+<div class="phx-hero details_authors">
+<span><%= link "Volver", to: Routes.author_path(@conn, :index) %></span>
+<h1>Detalles <%= @author.fullname %>:</h1>
+
 
 <ul>
 
   <li>
-    <strong>Fullname:</strong>
+    <strong>Nombre Completo:</strong>
     <%= @author.fullname %>
   </li>
 
   <li>
-    <strong>Pseudonym:</strong>
+    <strong>Pseudonimo:</strong>
     <%= @author.pseudonym %>
   </li>
 
   <li>
-    <strong>Birth:</strong>
+    <strong>Fec. Nacimiento:</strong>
     <%= @author.birth %>
   </li>
 
   <li>
-    <strong>Death:</strong>
+    <strong>Muerte:</strong>
     <%= @author.death %>
   </li>
 
   <li>
-    <strong>Nationality:</strong>
+    <strong>País:</strong>
     <%= @author.nationality %>
   </li>
 
 </ul>
-
-<span><%= link "Edit", to: Routes.author_path(@conn, :edit, @author) %></span> |
-<span><%= link "Back", to: Routes.author_path(@conn, :index) %></span>
+</div>

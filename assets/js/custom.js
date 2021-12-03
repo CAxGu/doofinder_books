@@ -1,19 +1,8 @@
 //Fichero javascript con todo el código custom que utilizaremos en la aplicación
 
 /**
- * Funcion que dará funcionalidad al botón "Acceder" del home.
- */
-function accederListadoLibros() {
-    if (window.location.pathname == '/') {
-        let btnAccess = document.getElementById('btnAcceso_lista');
-        if (btnAccess != null && btnAccess != undefined) {
-            btnAccess.addEventListener("click", () => window.location.pathname = '/books');
-        }
-    }
-}
-
-/**
  * Función que permite detectar en tiempo real, lo escrito en la barra de filtrado/busqueda
+ * (FUNCIONALIDAD SIN IMPLEMENTAR.)
  */
 function detectarBusqueda() {
     if (window.location.pathname == '/list') {
@@ -65,6 +54,30 @@ $(function() {
     });
 });
 
+
+//Datepickers Form Nac/Muerte
+$("#datepicker_death").attr('disabled', true);
+$(function() {
+    $("#datepicker_birth").datepicker({
+        defaultDate: new Date(),
+        dateFormat: 'yy-mm-dd',
+        onSelect: function(dateStr) {
+            $("#datepicker_death").attr('disabled', false);
+            $("#datepicker_death").datepicker("option", { dateFormat: 'yy-mm-dd', defaultDate: new Date(dateStr), minDate: new Date(dateStr) })
+                //$('#datepicker_pub').val(returnFormatDateAsStr(dateStr));
+        }
+    });
+});
+
+$(function() {
+    $('#datepicker_death').datepicker({
+        dateFormat: 'yy-mm-dd',
+        onSelect: function(dateStr) {
+            //$('#datepicker_ret').val(returnFormatDateAsStr(dateStr));
+        }
+    });
+});
+
 //Datepicker Regional ES
 /**
  * Función que nos permite cargar en los datepicker, el locale_ES
@@ -103,16 +116,48 @@ function returnFormatDateAsStr(date) {
     return dayStr + '/' + dateToFormat.getMonth().toString() + '/' + dateToFormat.getFullYear().toString();
 }
 
-$("p.alert").on("show", function() {
-    setTimeout(function() { console.log("hola juaporr"); }, 3000);
 
-});
 
-$(document).on('show', '.p.alert.alert-info', function(event) {
-    console.log("hola preshiosho");
+function prueba() {
+    /*
+    $(window).on('load', '#hidden_counter_author', function(event) {
+        console.log("holiwis");
+    });
+
+    $(window).on('load', '#hidden_counter_categories', function(event) {
+        console.log("holiueeeeeeeepa");
+    });
+*/
+    $(document).ready(function() {
+        document.getElementById
+        console.log("holiwis");
+    });
+
+    $(document).ready(function() {
+        console.log("holiueeeeeeeepa");
+    });
+}
+
+/**
+ * Habilita o deshabilita el botón de Alta de Libros, si no existen un mínimo de 1 Autor y 1 Categoría creadas anteriormente
+ */
+$(document).ready(function(event) {
+    if (document.body.contains(document.getElementById('btn_alta_book_list'))) {
+        var listCategoriesLength = document.getElementById('hidden_counter_categories');
+        var listAutoresLength = document.getElementById('hidden_counter_author');
+        var buttonAltaBooks = document.getElementById('btn_alta_book_list');
+
+        if (listCategoriesLength != undefined && listAutoresLength != undefined) {
+            if (listCategoriesLength.value > 0 && listAutoresLength.value > 0) {
+                buttonAltaBooks.disabled = false;
+            } else {
+                buttonAltaBooks.disabled = true;
+            }
+
+        }
+    }
 });
 
 
 window.onload = mostrarDetalle();
-window.onload = accederListadoLibros();
 window.onload = detectarBusqueda();

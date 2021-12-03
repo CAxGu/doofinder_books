@@ -1,12 +1,13 @@
 <div class="phx-hero">
-  <div id="buscador_libros">
-    <input type="text" placeholder="Buscar Libro..">
+  <div  id="buscador_libros">
+    <input title='Funcionalidad pendiente de implementar' disabled type="text" placeholder="Buscar Libro..">
   </div>
-  <div >
-    <%= button("Alta Libro", to: Routes.book_path(@conn, :new), method: :get, class: "btn new-button-card new-book") %>
+  <div>
+    <input id="hidden_counter_author" value={length(@authors)} style="display:none;"/>
+    <input id="hidden_counter_categories" value={length(@categories)} style="display:none;"/>
+    <%= button("Alta Libro", to: Routes.book_path(@conn, :new), method: :get, class: "btn new-button-card new-book" ,id: "btn_alta_book_list") %>
     <%= button("Autores", to: Routes.author_path(@conn, :index), method: :get, class: "btn new-button-card author-list") %>
     <%= button("Categorías", to: Routes.category_path(@conn, :index), method: :get, class: "btn new-button-card category-list") %>
-    <label class={if length(@authors)>0 && length(@categories)>0 do "hola" else "pepe" end}>label disable</label>
   </div>
   <ul class="list_books">
     <%= for book <- @books do %>

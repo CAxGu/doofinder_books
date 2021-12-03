@@ -1,4 +1,6 @@
-<h1>Show Category</h1>
+<div class="phx-hero details_categories">
+<span><%= link "Volver", to: Routes.category_path(@conn, :index) %></span>
+<h1>Detalles Categoría <%= @category.name %>:</h1>
 
 <ul>
 
@@ -13,6 +15,5 @@
   </li>
 
 </ul>
+</div>
 
-<span><%= link "Edit", to: Routes.category_path(@conn, :edit, @category) %></span> |
-<span><%= link "Back", to: Routes.category_path(@conn, :index) %></span>

@@ -1,5 +1,7 @@
-<h1>New Category</h1>
+<div class="phx-hero">
+<span><%= link "Volver", to: Routes.category_path(@conn, :index) %></span>
+<h1>Alta Categoría</h1>
 
 <%= render "form.html", Map.put(assigns, :action, Routes.category_path(@conn, :create)) %>
 
-<span><%= link "Back", to: Routes.category_path(@conn, :index) %></span>
+</div>

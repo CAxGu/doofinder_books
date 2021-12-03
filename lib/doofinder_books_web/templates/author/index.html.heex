@@ -1,13 +1,18 @@
-<h1>Listing Authors</h1>
-
-<table>
-  <thead>
+<div class="phx-hero content_authors">
+<h1>Listado de Autores</h1>
+<div >
+    <%= button("Libros", to: Routes.book_path(@conn, :index), method: :get, class: "btn new-button-card new-book") %>
+    <%= button("Alta Autor", to: Routes.author_path(@conn, :new), method: :get, class: "btn new-button-card author-list") %>
+    <%= button("Categorías", to: Routes.category_path(@conn, :index), method: :get, class: "btn new-button-card category-list") %>
+</div>
+<table class="table_authors">
+  <thead class="table-cabecera">
     <tr>
-      <th>Fullname</th>
-      <th>Pseudonym</th>
-      <th>Birth</th>
-      <th>Death</th>
-      <th>Nationality</th>
+      <th>Nombre</th>
+      <th>Pseudonimo</th>
+      <th>F. Nac</th>
+      <th>Muerte</th>
+      <th>País</th>
 
       <th></th>
     </tr>
@@ -21,14 +26,13 @@
       <td><%= author.death %></td>
       <td><%= author.nationality %></td>
 
-      <td>
-        <span><%= link "Show", to: Routes.author_path(@conn, :show, author) %></span>
-        <span><%= link "Edit", to: Routes.author_path(@conn, :edit, author) %></span>
-        <span><%= link "Delete", to: Routes.author_path(@conn, :delete, author), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      <td class="btns_gestion_table">
+        <%= button("", to: Routes.author_path(@conn, :show, author), method: :get, class: "btn show-button-table") %>
+        <%= button("", to: Routes.author_path(@conn, :edit, author), method: :get, class: "btn edit-button-table") %>
+        <%= button("", to: Routes.author_path(@conn, :delete, author), method: :delete, data: [confirm: "¿Confirmas la eliminación?"], class: "btn delete-button-table") %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
-
-<span><%= link "New Author", to: Routes.author_path(@conn, :new) %></span>
+</div>

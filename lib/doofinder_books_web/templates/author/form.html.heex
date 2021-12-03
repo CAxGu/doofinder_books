@@ -1,31 +1,64 @@
 <.form let={f} for={@changeset} action={@action}>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+      <p>Oops, algo no ha ido bien! Revise los errores siguientes.</p>
     </div>
   <% end %>
 
-  <%= label f, :fullname %>
-  <%= text_input f, :fullname %>
-  <%= error_tag f, :fullname %>
+<div class="form-container_authors">
+    <div class="frow-1-authors">     
+      <div class="block-1-authors">
+        <div class="name-author">
+          <label>
+            <%= label f, "Nombre_Completo" , class: "fullname-label" %><span class="important">&nbsp;*</span>
+          </label>
+          <%= text_input f, :fullname, class: "fullname-input" , placeholder: "Nombre Completo"%>
+          <%= error_tag f, :fullname %>
+        </div>  
+        <div class="pseudonym-author">
+          <label>
+            <%= label f, "Psudónimo" , class: "pseudonym-label" %>
+          </label>
+          <%= text_input f, :pseudonym, class: "pseudonym-input", placeholder: "Pseudónimo" %>
+          <%= error_tag f, :pseudonym %>
+        </div>
+      </div>
+    </div>
+    <div class="frow-2-authors">  
+      <div class="block-2-authors">
+        <div class="dates-author-birth">
+          <label>
+            <%= label f, "Fec. Nacimiento", class: "birth-label" %><span class="important">&nbsp;*</span>
+          </label>
+          <%= text_input f, :birth, class: "dates-birth-input",  id: "datepicker_birth", placeholder: "MM-DD-YYYY", readonly: true %>
+          <%= error_tag f, :birth %>
+        </div>
+        <div class="dates-author-death">
+          <label>
+            <%= label f, "Muerte" ,class: "dates-death-label" %>
+          </label>
+            <%= text_input f, :death, class: "dates-death-input" ,  id: "datepicker_death", placeholder: "MM-DD-YYYY", readonly: true %>
+            <%= error_tag f, :death %>
+        </div>
+      </div>
+    </div>
+    <div class="frow-3-authors">
+      <div class="block-3-authors">
+        <div class="nationality-author">
+          <label>
+            <%= label f, "País", class: "nacionality-label" %>
+          </label>
+          <%= select f, :nationality, [" ": "", Español: "ESP", Inglés: "ING"], class: "nationality-input"  %>
+          <%= error_tag f, :nationality %>
+        </div>
+      </div>
 
-  <%= label f, :pseudonym %>
-  <%= text_input f, :pseudonym %>
-  <%= error_tag f, :pseudonym %>
-
-  <%= label f, :birth %>
-  <%= date_select f, :birth %>
-  <%= error_tag f, :birth %>
-
-  <%= label f, :death %>
-  <%= date_select f, :death %>
-  <%= error_tag f, :death %>
-
-  <%= label f, :nationality %>
-  <%= text_input f, :nationality %>
-  <%= error_tag f, :nationality %>
-
-  <div>
-    <%= submit "Save" %>
+    </div>
+    <div id="btns-form">
+    <div class="container-submit-form">
+      <%= submit "Guardar", class: "btn-submitForm" %>
+      <%= button("Cancelar", to: Routes.author_path(@conn, :index), method: :get , class: "btn-cancel") %>
+    </div>
+   </div>
   </div>
 </.form>

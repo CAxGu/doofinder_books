@@ -1,17 +1,10 @@
 defmodule DoofinderBooksWeb.BookController do
   use Timex
   use DoofinderBooksWeb, :controller
-
   alias DoofinderBooks.DBooks
   alias DoofinderBooks.DBooks.Book
-
   alias DoofinderBooks.DAuthor
-  alias DoofinderBooks.DAuthor.Author
-
   alias DoofinderBooks.DCategory
-  alias DoofinderBooks.DCategory.Category
-
-  alias DoofinderBooks.RelationsBooks
   alias DoofinderBooks.RelationsBooks.Rel_book_author
   alias DoofinderBooks.RelationsBooks.Rel_book_category
 
@@ -24,7 +17,7 @@ defmodule DoofinderBooksWeb.BookController do
     authors = DAuthor.list_authors()
     categories = DCategory.list_categories()
     map = fromDB_to_map(books)
-    render(conn, "index.html",books: map, authors: authors, categories: categories)
+    render(conn, "index.html", books: map, authors: authors, categories: categories)
   end
 
   @doc """
@@ -48,7 +41,7 @@ defmodule DoofinderBooksWeb.BookController do
     case DBooks.create_book_with_relations(book_params) do
       {:ok, book} ->
         conn
-        |> put_flash(:info, "Libro dado de alta correctamente.")
+        |> put_flash(:info, "Libro Dado de Alta Correctamente.")
         |> redirect(to: Routes.book_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -82,7 +75,7 @@ defmodule DoofinderBooksWeb.BookController do
     case DBooks.update_book_and_relations(book, book_params) do
       {:ok, book} ->
         conn
-        |> put_flash(:info, "Libro actualizado correctamente.")
+        |> put_flash(:info, "Libro Actualizado Correctamente.")
         |> redirect(to: Routes.book_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -98,7 +91,7 @@ defmodule DoofinderBooksWeb.BookController do
     {:ok, _book} = DBooks.delete_book_and_relations(book)
 
     conn
-    |> put_flash(:info, "Libro borrado correctamente.")
+    |> put_flash(:info, "Libro Borrado Correctamente.")
     |> redirect(to: Routes.book_path(conn, :index))
   end
 

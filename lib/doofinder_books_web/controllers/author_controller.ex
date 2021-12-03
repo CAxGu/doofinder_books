@@ -18,7 +18,7 @@ defmodule DoofinderBooksWeb.AuthorController do
     case DAuthor.create_author(author_params) do
       {:ok, author} ->
         conn
-        |> put_flash(:info, "Author created successfully.")
+        |> put_flash(:info, "Autor Dado de Alta Correctamente.")
         |> redirect(to: Routes.author_path(conn, :show, author))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -34,23 +34,15 @@ defmodule DoofinderBooksWeb.AuthorController do
   def edit(conn, %{"id" => id}) do
     author = DAuthor.get_author!(id)
     changeset = DAuthor.change_author(author)
-
-    IO.inspect("AUTHOR EDIT!")
-    IO.inspect(author)
-    IO.inspect(changeset)
-
     render(conn, "edit.html", author: author, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "author" => author_params}) do
     author = DAuthor.get_author!(id)
-    IO.inspect("AUTHOR UPDATE!")
-    IO.inspect(author)
-
     case DAuthor.update_author(author, author_params) do
       {:ok, author} ->
         conn
-        |> put_flash(:info, "Author updated successfully.")
+        |> put_flash(:info, "Autor Actualizado Correctamente.")
         |> redirect(to: Routes.author_path(conn, :show, author))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -63,7 +55,7 @@ defmodule DoofinderBooksWeb.AuthorController do
     {:ok, _author} = DAuthor.delete_author(author)
 
     conn
-    |> put_flash(:info, "Author deleted successfully.")
+    |> put_flash(:info, "Autor Borrado Correctamente.")
     |> redirect(to: Routes.author_path(conn, :index))
   end
 end

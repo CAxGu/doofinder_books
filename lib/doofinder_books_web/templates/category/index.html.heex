@@ -1,10 +1,15 @@
-<h1>Listing Categories</h1>
-
-<table>
-  <thead>
+<div class="phx-hero content_categories">
+<h1>Listado Categorías</h1>
+<div >
+    <%= button("Libros", to: Routes.book_path(@conn, :index), method: :get, class: "btn new-button-card new-book" ) %>
+    <%= button("Autores", to: Routes.author_path(@conn, :index), method: :get, class: "btn new-button-card author-list") %>
+    <%= button("Alta Categorías", to: Routes.category_path(@conn, :new), method: :get, class: "btn new-button-card category-list") %>
+</div>
+<table class="table_categories">
+  <thead class="table-cabecera_cat">
     <tr>
-      <th>Name</th>
-      <th>Description</th>
+      <th>Nombre</th>
+      <th>Descripción</th>
 
       <th></th>
     </tr>
@@ -13,16 +18,15 @@
 <%= for category <- @categories do %>
     <tr>
       <td><%= category.name %></td>
-      <td><%= category.description %></td>
+      <td class="td_desc_table"><%= category.description %></td>
 
-      <td>
-        <span><%= link "Show", to: Routes.category_path(@conn, :show, category) %></span>
-        <span><%= link "Edit", to: Routes.category_path(@conn, :edit, category) %></span>
-        <span><%= link "Delete", to: Routes.category_path(@conn, :delete, category), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      <td class="btns_gestion_table">
+        <%= button("", to: Routes.category_path(@conn, :show, category), method: :get, class: "btn show-button-table-cat") %>
+        <%= button("", to: Routes.category_path(@conn, :edit, category), method: :get, class: "btn edit-button-table-cat") %>
+        <%= button("", to: Routes.category_path(@conn, :delete, category), method: :delete, data: [confirm: "¿Confirmas la eliminación?"], class: "btn delete-button-table-cat") %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
-
-<span><%= link "New Category", to: Routes.category_path(@conn, :new) %></span>
+</div>

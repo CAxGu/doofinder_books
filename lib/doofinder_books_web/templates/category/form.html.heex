@@ -5,15 +5,35 @@
     </div>
   <% end %>
 
-  <%= label f, :name %>
-  <%= text_input f, :name %>
-  <%= error_tag f, :name %>
-
-  <%= label f, :description %>
-  <%= textarea f, :description %>
-  <%= error_tag f, :description %>
-
-  <div>
-    <%= submit "Save" %>
-  </div>
+  
+<div class="form-container_categories">
+    <div class="frow-1-categories">     
+      <div class="block-1-categories">
+        <div class="name-category">
+          <label>
+             <%= label f, "Nombre" ,class: "nombre-cat-label" %><span class="important">&nbsp;*</span>
+          </label>
+            <%= text_input f, :name, class: "nombre-cat-input" , placeholder: "Ej: Fantasía"%>
+            <%= error_tag f, :name %>
+        </div>
+      </div>
+    </div>
+    <div class="frow-2-categories">  
+      <div class="block-2-categories">
+        <div class="desc-category">
+          <label>
+            <%= label f, "Descripción"  ,class: "description-cat-label" %>
+          </label>
+          <%= textarea f, :description, class: "description-cat-input"%>
+          <%= error_tag f, :description %>
+        </div>
+      </div>
+    </div>
+    <div id="btns-form-categ">
+      <div class="container-submit-form">
+        <%= submit "Guardar", class: "btn-submitForm" %>
+        <%= button("Cancelar", to: Routes.category_path(@conn, :index), method: :get , class: "btn-cancel") %>
+      </div>
+   </div>
+</div>
 </.form>
