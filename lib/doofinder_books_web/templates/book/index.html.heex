@@ -12,7 +12,7 @@
   <ul class="list_books">
     <%= for book <- @books do %>
       <li>
-        <div id={(["cardId_", book.id] |> Enum.join "")} class="card_book">
+        <div id={(["cardId_", (book.id)] |> (Enum.join ""))} class="card_book">
           <div class="grid-book-list ">
             <div class="miniatura">
               <img src={Routes.static_path(@conn, "/images/book.png")} alt="Avatar" style="width:100%">
@@ -30,11 +30,11 @@
               <%= button("", to: Routes.book_path(@conn, :delete, book), method: :delete, data: [confirm: "Are you sure?"], class: "btn delete-button-card") %>
             </div>
           </div>
-          <div id={["showhideId_", book.id] |> Enum.join ""} class="text-center content-showhide">
-            <span id={["showDetailsId_", book.id] |> Enum.join ""}><i class="fas fa-eye"></i>&nbsp;Mostrar Detalle</span>
-            <span hidden id={["hideDetailsId_", book.id] |> Enum.join ""}><i  class="fas fa-eye-slash"></i>&nbsp;Ocultar Detalle</span>
+          <div id={(["showhideId_", (book.id)] |> (Enum.join ""))} class="text-center content-showhide">
+            <span id={(["showDetailsId_", (book.id)] |> (Enum.join ""))}><i class="fas fa-eye"></i>&nbsp;Mostrar Detalle</span>
+            <span hidden id={(["hideDetailsId_", (book.id)] |> (Enum.join ""))}><i  class="fas fa-eye-slash"></i>&nbsp;Ocultar Detalle</span>
           </div>
-          <div id={["cardDetailsId_", book.id] |> Enum.join ""} class="card-details-container card-details-hide">
+          <div id={(["cardDetailsId_", (book.id)] |> (Enum.join ""))} class="card-details-container card-details-hide">
                 <label>DESC: <%= book.description %></label>
                 <label>ISBN: <%= book.isbn %></label>
                 <label>publishing_date: <%= book.publishing_date %></label>

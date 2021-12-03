@@ -39,7 +39,7 @@ defmodule DoofinderBooksWeb.BookController do
     authorList = [{:"", ""} | DAuthor.list_AllIdNameAuthors()]
     categoryList = [{:"", ""} | DCategory.list_AllIdNameCategories()]
     case DBooks.create_book_with_relations(book_params) do
-      {:ok, book} ->
+      {:ok, _book} ->
         conn
         |> put_flash(:info, "Libro Dado de Alta Correctamente.")
         |> redirect(to: Routes.book_path(conn, :index))
@@ -73,7 +73,7 @@ defmodule DoofinderBooksWeb.BookController do
     authorList = [{:"", ""} | DAuthor.list_AllIdNameAuthors()]
     categoryList = [{:"", ""} | DCategory.list_AllIdNameCategories()]
     case DBooks.update_book_and_relations(book, book_params) do
-      {:ok, book} ->
+      {:ok, _book} ->
         conn
         |> put_flash(:info, "Libro Actualizado Correctamente.")
         |> redirect(to: Routes.book_path(conn, :index))
@@ -100,7 +100,7 @@ defmodule DoofinderBooksWeb.BookController do
   """
   def fromDB_to_map(books) do
     Enum.map(books, fn(book) ->
-      map_book = Map.merge(%Book{}, book)
+      _map_book = Map.merge(%Book{}, book)
     end)
   end
 
@@ -117,7 +117,7 @@ defmodule DoofinderBooksWeb.BookController do
   """
   def preload_changeset_fields (books) do
     Enum.map(books, fn(book) ->
-      map_book = Map.merge(%Book{authorsinfo: [%Rel_book_author{}],categoriesinfo: [%Rel_book_category{}]}, book)
+      _map_book = Map.merge(%Book{authorsinfo: [%Rel_book_author{}],categoriesinfo: [%Rel_book_category{}]}, book)
     end)
   end
 end
