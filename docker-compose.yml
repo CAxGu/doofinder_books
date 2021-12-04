@@ -1,0 +1,46 @@
+version: "3.8"
+
+networks:
+  doofindernet:
+    driver: overlay
+    attachable: true # Needed in order to run custom commands in the container
+
+services:   
+  doofinder_books:
+      image: doofinder_books:1.0.0
+      container_name: doofinder_books
+      hostname: doofinder_books
+      ports:
+        - "80:4000"
+      environment:
+        - config/docker.env
+      depends_on:
+        - postgres_db
+      deploy:
+        replicas: 1
+        restart_policy:
+          condition: on-failure
+      networks:
+        - doofindernet
+
+  postgres_db:
+    image: 'postgres:latest'
+    container_name: postgres_db
+    hostname: postgres_db
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - APP_DB_USER=doofinder
+      - APP_DB_PASS=doofinder
+      - APP_DB_NAME=doofinder  
+    restart: always
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - ./database_entry:/docker-entrypoint-initdb.d/
+    networks:
+      - doofindernet
