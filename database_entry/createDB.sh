@@ -12,7 +12,7 @@ BEGIN;
 		id SERIAL  NOT NULL PRIMARY KEY,
 		fullname VARCHAR(255) NOT NULL,
 		pseudonym VARCHAR(255) NULL,
-		birth TIMESTAMP NOT NULL,
+		birth DATE NOT NULL,
 		death DATE NULL,
 		nationality VARCHAR(255) NULL,
 		inserted_at TIMESTAMP NOT NULL,
@@ -60,5 +60,10 @@ BEGIN;
 		CONSTRAINT book_id_fk FOREIGN KEY (book_id) REFERENCES public.books (id) ,
 		CONSTRAINT category_id_fk FOREIGN KEY (category_id) REFERENCES public.categories (id));
 		CREATE UNIQUE INDEX id_bookcategories ON rel_books_categories (book_id);
+COMMIT;
+BEGIN;
+CREATE TABLE IF NOT EXISTS "schema_migrations" (
+	"version" BIGINT NOT NULL PRIMARY KEY,
+	"inserted_at" TIMESTAMP NULL);
 COMMIT;
 EOSQL

@@ -1,7 +1,7 @@
 <.form let={f} for={@changeset} action={@action}>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+      <p>Oops, algo no ha ido bien! Revise los errores siguientes.</p>
     </div>
   <% end %>
 
@@ -31,8 +31,8 @@
     </div>
     <div id="btns-form-categ">
       <div class="container-submit-form">
-        <%= submit "Guardar", class: "btn-submitForm" %>
         <%= button("Cancelar", to: Routes.category_path(@conn, :index), method: :get , class: "btn-cancel") %>
+        <%= submit "Guardar", class: "btn-submitForm" %>
       </div>
    </div>
 </div>

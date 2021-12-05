@@ -13,7 +13,6 @@ RUN mix do local.hex --force, local.rebar --force
 # set build ENV
 ENV MIX_ENV=prod
 
-
 # install mix dependencies
 COPY mix.exs mix.lock ./
 COPY config config
@@ -43,6 +42,8 @@ FROM alpine:3.14.2 AS doofinder_books
 # addgroup [-g GID] [-S] [USER] GROUP
 # adduser [OPTIONS] USER [GROUP]
 #RUN addgroup --system doofinder_books && adduser --system doofinder_books doofinder_books
+RUN apk add --update git build-base nodejs npm yarn python3 libstdc++
+
 RUN adduser \
     --disabled-password \
     --gecos "" \

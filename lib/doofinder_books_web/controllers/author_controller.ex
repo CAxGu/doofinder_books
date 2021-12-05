@@ -19,7 +19,7 @@ defmodule DoofinderBooksWeb.AuthorController do
       {:ok, author} ->
         conn
         |> put_flash(:info, "Autor Dado de Alta Correctamente.")
-        |> redirect(to: Routes.author_path(conn, :show, author))
+        |> redirect(to: Routes.author_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -43,7 +43,7 @@ defmodule DoofinderBooksWeb.AuthorController do
       {:ok, author} ->
         conn
         |> put_flash(:info, "Autor Actualizado Correctamente.")
-        |> redirect(to: Routes.author_path(conn, :show, author))
+        |> redirect(to: Routes.author_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", author: author, changeset: changeset)

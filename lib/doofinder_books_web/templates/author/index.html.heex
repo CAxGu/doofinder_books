@@ -2,7 +2,7 @@
 <h1>Listado de Autores</h1>
 <div >
     <%= button("Libros", to: Routes.book_path(@conn, :index), method: :get, class: "btn new-button-card new-book") %>
-    <%= button("Alta Autor", to: Routes.author_path(@conn, :new), method: :get, class: "btn new-button-card author-list") %>
+    <%= button("  Alta Autor", to: Routes.author_path(@conn, :new), method: :get, class: "btn new-button-card author-list new-icon") %>
     <%= button("Categorías", to: Routes.category_path(@conn, :index), method: :get, class: "btn new-button-card category-list") %>
 </div>
 <table class="table_authors">

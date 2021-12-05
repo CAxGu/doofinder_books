@@ -48,7 +48,7 @@
           <label>
             <%= label f, "País", class: "nacionality-label" %>
           </label>
-          <%= select f, :nationality, [" ": "", Español: "ESP", Inglés: "ING"], class: "nationality-input"  %>
+          <%= select f, :nationality, [" ": "", España: "ESP", Reino_Unido: "ING"], class: "nationality-input"  %>
           <%= error_tag f, :nationality %>
         </div>
       </div>
@@ -56,8 +56,8 @@
     </div>
     <div id="btns-form">
     <div class="container-submit-form">
-      <%= submit "Guardar", class: "btn-submitForm" %>
       <%= button("Cancelar", to: Routes.author_path(@conn, :index), method: :get , class: "btn-cancel") %>
+      <%= submit "Guardar", class: "btn-submitForm" %>
     </div>
    </div>
   </div>

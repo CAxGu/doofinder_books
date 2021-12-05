@@ -3,7 +3,7 @@
 <div >
     <%= button("Libros", to: Routes.book_path(@conn, :index), method: :get, class: "btn new-button-card new-book" ) %>
     <%= button("Autores", to: Routes.author_path(@conn, :index), method: :get, class: "btn new-button-card author-list") %>
-    <%= button("Alta Categorías", to: Routes.category_path(@conn, :new), method: :get, class: "btn new-button-card category-list") %>
+    <%= button("  Alta Categorías", to: Routes.category_path(@conn, :new), method: :get, class: "btn new-button-card category-list new-icon") %>
 </div>
 <table class="table_categories">
   <thead class="table-cabecera_cat">

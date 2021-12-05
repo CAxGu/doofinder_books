@@ -7,11 +7,11 @@ networks:
 
 services:   
   doofinder_books:
-      image: doofinder_books:1.0.0
+      image: caxgu/doofinder_books:1.0.0
       container_name: doofinder_books
       hostname: doofinder_books
       ports:
-        - "80:4000"
+        - "4000:4000"
       environment:
         - config/docker.env
       depends_on:

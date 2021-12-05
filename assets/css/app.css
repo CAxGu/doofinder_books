@@ -224,6 +224,11 @@ Cartas Libros Listado
                     content: "\f044";
                 }
                 
+                .new-icon:before {
+                    font-family: "Font Awesome 5 Free";
+                    content: "\f055";
+                }
+                
                 .delete-button-card {
                     background-color: #dc3545;
                     border: #dc3545;
@@ -810,7 +815,7 @@ css pagina About
                     grid-row: 1;
                 }
                 
-                .frow-1-categories {
+                .frow-2-categories {
                     grid-column: 1;
                     grid-row: 2;
                 }

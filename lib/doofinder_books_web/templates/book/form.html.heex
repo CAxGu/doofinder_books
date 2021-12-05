@@ -95,8 +95,8 @@
 
   <div id="btns-form">
     <div class="container-submit-form">
-      <%= submit "Guardar", class: "btn-submitForm" %>
       <%= button("Cancelar", to: Routes.book_path(@conn, :index), method: :get , class: "btn-cancel") %>
+      <%= submit "Guardar", class: "btn-submitForm" %>
     </div>
   </div>
 </.form>

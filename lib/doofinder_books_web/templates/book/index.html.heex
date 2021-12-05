@@ -5,7 +5,7 @@
   <div>
     <input id="hidden_counter_author" value={length(@authors)} style="display:none;"/>
     <input id="hidden_counter_categories" value={length(@categories)} style="display:none;"/>
-    <%= button("Alta Libro", to: Routes.book_path(@conn, :new), method: :get, class: "btn new-button-card new-book" ,id: "btn_alta_book_list") %>
+    <%= button("  Alta Libro", to: Routes.book_path(@conn, :new), method: :get, class: "btn new-button-card new-book new-icon" ,id: "btn_alta_book_list") %>
     <%= button("Autores", to: Routes.author_path(@conn, :index), method: :get, class: "btn new-button-card author-list") %>
     <%= button("Categorías", to: Routes.category_path(@conn, :index), method: :get, class: "btn new-button-card category-list") %>
   </div>
@@ -35,14 +35,13 @@
             <span hidden id={(["hideDetailsId_", (book.id)] |> (Enum.join ""))}><i  class="fas fa-eye-slash"></i>&nbsp;Ocultar Detalle</span>
           </div>
           <div id={(["cardDetailsId_", (book.id)] |> (Enum.join ""))} class="card-details-container card-details-hide">
-                <label>DESC: <%= book.description %></label>
                 <label>ISBN: <%= book.isbn %></label>
-                <label>publishing_date: <%= book.publishing_date %></label>
-                <label>retired_date:<%= book.retired_date %></label>
-                <label>CATEGORIES: <%= book.category_id %>
-                </label>
-                <label>publishing: <%= book.publishing %></label>
-                <label>language: <%= book.language %></label>
+                <label>Categoría: <%= book.category_id %></label>
+                <label>Editorial: <%= book.publishing %></label>
+                <label>Idioma: <%= book.language %></label>
+                <label>Publicación: <%= book.publishing_date %></label>
+                <label>Retirada:<%= book.retired_date %></label>
+                <label>Descripción: <%= book.description %></label>
           </div>
         </div>
       </li>

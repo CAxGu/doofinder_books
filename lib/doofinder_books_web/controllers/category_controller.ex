@@ -19,7 +19,7 @@ defmodule DoofinderBooksWeb.CategoryController do
       {:ok, category} ->
         conn
         |> put_flash(:info, "Categoría Dada de Alta Correctamente.")
-        |> redirect(to: Routes.category_path(conn, :show, category))
+        |> redirect(to: Routes.category_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -43,8 +43,8 @@ defmodule DoofinderBooksWeb.CategoryController do
     case DCategory.update_category(category, category_params) do
       {:ok, category} ->
         conn
-        |> put_flash(:info, "Categoría Actualizada CorrectamenteCategory updated successfully.")
-        |> redirect(to: Routes.category_path(conn, :show, category))
+        |> put_flash(:info, "Categoría Actualizada Correctamente")
+        |> redirect(to: Routes.category_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", category: category, changeset: changeset)
