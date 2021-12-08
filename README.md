@@ -66,16 +66,16 @@ Para mas info de ejecución en producción, visita la [guía de desarrollo](http
 
 
 ## MEJORAS
-Dado que este proyecto ha sido realizado para una prueba técnica, el tiempo de entrega ha sido improtante, por ello, muchas cosas se han quedado en el tintero, a pesar de haber sido contempladas.
+Dado que este proyecto ha sido realizado para una prueba técnica, el tiempo de entrega ha sido importante, por ello, muchas cosas se han quedado en el tintero, a pesar de haber sido contempladas.
 
-Cómo primer punto, mencionar que desconocía completamente el framework/tecnología Elixir Phoenix, por lo que a pesar de haberseme indicado que podía utilizar otro más afín, decidí utilizar el propio lenguaje con el que trabaja la empresa para la que realizaba esta prueba. Esto implica que el tiempo de desarrollo se ha estirado un poco mñas de la cuenta, contando con que he tenido que "formarme" en su funcionamiento a la vez que la realizaba.
+Cómo primer punto, mencionar que desconocía completamente el framework/tecnología Elixir Phoenix, por lo que a pesar de haberseme indicado que podía utilizar otro más afín, decidí utilizar el propio lenguaje con el que trabaja la empresa para la que realizaba esta prueba. Esto implica que el tiempo de desarrollo se ha estirado un poco más de la cuenta, contando con que he tenido que "formarme" en su funcionamiento a la vez que la realizaba.
 
 Algunas de ellas:
 * Sistema de Login. Permitir un acceso en modo usuario genérico solo lectura, y un modo admin donde poder gestionar todo.
 * Control de errores para la eliminación de autores y o categorías, cuando existe un libro asociado a a las mismas todavía y solamente existe 1 autor y 1 categoría creadas en ese momento.
 * Refactorizado de vistas, para utilizar más cuidadosamente el responsive.
 * Refactorizado de botones alta para ser una barra independiente y evitar el duplciado de código en las vistas.
-* Upload de imágenes para los libros. Poder seleccioanr una carátula independiente por libro, sin necesidad de tener una imagen basica.
+* Upload de imágenes para los libros. Poder seleccioanr una carátula independiente por libro, sin necesidad de tener una imagen básica.
 * Mensajes Alert para altas, errores y o avisos de manera emergente y no fija
 * Sistema de deploy automatizado. Tanto en Docker cómo en un servidor dedicado.
 * Posible integración con backend en otro lenguaje (Ejemplo Django, Spring, Node.js....)
